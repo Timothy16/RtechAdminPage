@@ -95,7 +95,7 @@ export default {
 .card-s{
   border-radius: 10px;
   padding: 4rem 2rem;
-  width: 442px;
+  /* width: 442px; */
   height: 215px;
   cursor: pointer;
   transition: transform .2s;
@@ -107,7 +107,7 @@ export default {
   float: right;
 }
 .col-inner-style{
-  width: 442px;
+  /* width: 442px; */
   height: 225px;
   background: #FFFFFF;
   /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25); */
