@@ -1,18 +1,28 @@
 <template>
   <div class="upper-nav">
       <div class="">
-        <span class="header-t">New Orders</span>
+        <span class="header-t">Transactions</span>
       </div>
       <div class="links">
         <ul>
           <li>
-            <nuxt-link to="/new-orders/giftcard" :class="{'u-active' : checkUrl == '/new-orders/giftcard'}">
-              Giftcard orders
+            <nuxt-link to="/transactions" :class="{'u-active' : checkUrl == '/transactions'}">
+              All Transactions 
             </nuxt-link>
           </li>
           <li class="ml-3">
-            <nuxt-link to="/new-orders/crypto" :class="{'u-active' : checkUrl == '/new-orders/crypto'}">
-              Crypto Orders
+            <nuxt-link to="/transactions/pending" :class="{'u-active' : checkUrl == '/transactions/pending'}">
+              Pending 
+            </nuxt-link>
+          </li>
+          <li class="ml-3">
+            <nuxt-link to="/transactions/rejected" :class="{'u-active' : checkUrl == '/transactions/rejected'}">
+              Rejected 
+            </nuxt-link>
+          </li>
+          <li class="ml-3">
+            <nuxt-link to="/transactions/completed" :class="{'u-active' : checkUrl == '/transactions/completed'}">
+              Completed 
             </nuxt-link>
           </li>
         </ul>

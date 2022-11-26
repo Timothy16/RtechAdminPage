@@ -30,16 +30,30 @@
             <span class="links_name">New Orders</span>
           </nuxt-link>
         </li>
+         <li class="mb-1">
+          <nuxt-link to="/transactions" :class="{'active-h' : checkUrl == '/transactions' 
+          || checkUrl == '/transactions/pending' || checkUrl == '/transactions/completed' || checkUrl == '/transactions/rejected'}">
+            <i class='bx bxs-wallet'></i>
+            <span class="links_name">Transactions</span>
+          </nuxt-link>
+        </li>
         <li class="mb-1">
-           <nuxt-link to="/rate/giftcard" :class="{'active-h' : checkUrl == '/rate/giftcard' || checkUrl == '/rate/crypto'}">
-            <i class='bx bx-coin-stack' ></i>
-            <span class="links_name">Rate</span>
+           <nuxt-link to="/giftcard" :class="{'active-h' : checkUrl == '/giftcard' || checkUrl == '/giftcard/all-giftcards'
+           || checkUrl == '/giftcard/set-giftcard-rate'}">
+            <i class='bx bxs-credit-card-alt' ></i>
+            <span class="links_name">Giftcards</span>
            </nuxt-link>
         </li>
         <li class="mb-1">
            <nuxt-link to="/cryptocurrencies" :class="{'active-h' : checkUrl == '/cryptocurrencies' || checkUrl == '/cryptocurrencies'}">
             <i class='bx bx-bitcoin'></i>
             <span class="links_name">Cryptocurrencies</span>
+           </nuxt-link>
+        </li>
+        <li class="mb-1">
+           <nuxt-link to="/rate/giftcard" :class="{'active-h' : checkUrl == '/rate/giftcard' || checkUrl == '/rate/crypto'}">
+            <i class='bx bx-coin-stack' ></i>
+            <span class="links_name">Rate</span>
            </nuxt-link>
         </li>
         <li class="mb-1">

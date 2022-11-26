@@ -42,7 +42,7 @@ ul li{
   display: inline-flex;
   font-style: normal;
   font-weight: 600;
-  font-size: 20px;
+  font-size: 16px;
   line-height: 23px;
   color: #0C64E6;
 }

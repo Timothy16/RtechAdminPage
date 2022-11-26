@@ -1,18 +1,23 @@
 <template>
   <div class="upper-nav">
       <div class="">
-        <span class="header-t">New Orders</span>
+        <span class="header-t">Giftcard</span>
       </div>
       <div class="links">
         <ul>
           <li>
-            <nuxt-link to="/new-orders/giftcard" :class="{'u-active' : checkUrl == '/new-orders/giftcard'}">
-              Giftcard orders
+            <nuxt-link to="/giftcard" :class="{'u-active' : checkUrl == '/giftcard'}">
+              Create Giftcard 
             </nuxt-link>
           </li>
           <li class="ml-3">
-            <nuxt-link to="/new-orders/crypto" :class="{'u-active' : checkUrl == '/new-orders/crypto'}">
-              Crypto Orders
+            <nuxt-link to="/giftcard/set-giftcard-rate" :class="{'u-active' : checkUrl == '/giftcard/set-giftcard-rate'}">
+              Set Giftcard Rate 
+            </nuxt-link>
+          </li>
+          <li class="ml-3">
+            <nuxt-link to="/giftcard/all-giftcards" :class="{'u-active' : checkUrl == '/giftcard/all-giftcards'}">
+              Giftcards 
             </nuxt-link>
           </li>
         </ul>

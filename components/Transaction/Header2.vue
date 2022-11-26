@@ -1,21 +1,7 @@
 <template>
   <div class="upper-nav">
       <div class="">
-        <span class="header-t">New Orders</span>
-      </div>
-      <div class="links">
-        <ul>
-          <li>
-            <nuxt-link to="/new-orders/giftcard" :class="{'u-active' : checkUrl == '/new-orders/giftcard'}">
-              Giftcard orders
-            </nuxt-link>
-          </li>
-          <li class="ml-3">
-            <nuxt-link to="/new-orders/crypto" :class="{'u-active' : checkUrl == '/new-orders/crypto'}">
-              Crypto Orders
-            </nuxt-link>
-          </li>
-        </ul>
+        <span class="header-t">Transaction</span>
       </div>
   </div>
 </template>
@@ -42,7 +28,7 @@ ul li{
   display: inline-flex;
   font-style: normal;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 20px;
   line-height: 23px;
   color: #0C64E6;
 }
@@ -64,7 +50,7 @@ ul{
     line-height: 38px;
 }
 .upper-nav{
-    height: auto;
+    height: 100px;
     /* background: #fff; */
     background: #E1E6ED;
     position: fixed;
