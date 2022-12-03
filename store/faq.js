@@ -54,24 +54,24 @@ export const actions = {
     async getFaqs ({commit}, parameter) {
         
         // commit('SET_LOADING', true)
-        const { data } = await  this.$axios.$get('/api/admin/faq', parameter)
+        const { data } = await  this.$axios.$get(this.$config.baseURL + 'admin/faq', parameter)
         commit('SET_FAQS', data)
         // commit('SET_LOADING', false)
     },
     async addNewFaq ({commit}, queryParam) {
         commit('SET_LOADING', true)
-        const { data } = await  this.$axios.$post('/api/admin/faq/store', queryParam)
+        const { data } = await  this.$axios.$post(this.$config.baseURL + 'admin/faq/store', queryParam)
         commit('SET_LOADING', false)
     },
     async updateThisFaq ({commit,}, {parameter, faq_id}) {
         commit('SET_SAVING', true)
-        const {data} =await  this.$axios.$patch(`/api/admin/faq/${faq_id}/update`, parameter)
+        const {data} =await  this.$axios.$patch(this.$config.baseURL + `admin/faq/${faq_id}/update`, parameter)
         // commit('ADD_FAQ', data)
         commit('SET_SAVING', false)
     }, 
     async deleteThisFaqData ({commit,}, queryParam) {
         commit('SET_SAVING', true)
-        const {data} =await  this.$axios.$delete(`/api/admin/faq/${queryParam}/delete`)
+        const {data} =await  this.$axios.$delete(this.$config.baseURL + `admin/faq/${queryParam}/delete`)
         let faq_id = queryParam
         commit('DELETE_FAQ', faq_id)
         commit('SET_SAVING', false)
