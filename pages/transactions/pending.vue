@@ -17,7 +17,7 @@ export default {
    layout : "dashboard-layout",
     head() {
         return {
-            title: "All Transaction / Rtechbiz",
+            title: "Pending Transaction / Rtechbiz",
         };
     },
   name: 'IndexPage'

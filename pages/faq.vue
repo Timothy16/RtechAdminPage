@@ -2,18 +2,18 @@
   <div>
     <Header />
     <div class="upper-page">
-       <Crypto />
+       <Questions />
     </div>
-   
+    
   </div>
   
 </template>
 
 <script>
 import Header from '@/components/FAQ/Header.vue';
-import Crypto from '@/components/FAQ/Questions.vue'
+import Questions from '@/components/FAQ/Questions.vue'
 export default {
-  components: { Header, Crypto },
+  components: { Header, Questions },
    layout : "dashboard-layout",
     head() {
         return {

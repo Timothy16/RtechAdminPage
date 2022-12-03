@@ -94,10 +94,11 @@
         </li> -->
         <li class="log_out bg-log-out">
           
-            <nuxt-link to="/login">
+            <a :href="'/login?redirect=' + redirectUrl"
+                                v-on:click="logout()">
               <i class='bx bx-log-out'></i>
               <span class="links_name">Log out</span>
-             </nuxt-link>
+             </a>
          
         </li>
       </ul>
@@ -110,8 +111,16 @@ export default {
   computed : {
     checkUrl(){
       return this.$route.path
-    }
+    },
+     redirectUrl(){
+            return this.$route.fullPath
+    },
   },
+   methods : {
+        logout() {
+            this.$auth.logout();
+        },
+    },
 }
 </script>
 

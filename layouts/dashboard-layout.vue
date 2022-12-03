@@ -8,9 +8,8 @@
                 <Nuxt />
             </div>
         </section>
-        <!-- <a class="scroll-to-top rounded back-red" href="#page-top">
-            <i class="fas fa-angle-up"></i>
-        </a> -->
+        <notifications position="top right" group="all" />
+
     </div>
 </template>
 <script >

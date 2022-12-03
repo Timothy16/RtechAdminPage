@@ -17,7 +17,7 @@ export default {
    layout : "dashboard-layout",
     head() {
         return {
-            title: "Overview / Rtechbiz",
+            title: "Users / Rtechbiz",
         };
     },
   name: 'IndexPage'

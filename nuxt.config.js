@@ -1,5 +1,8 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
+  publicRuntimeConfig: {
+    BASE_URL: process.env.API_BASE,
+  },
   head: {
     title: 'rtech_web_admin',
     htmlAttrs: {
@@ -34,8 +37,49 @@ export default {
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     { src: 'plugins/maz.js', ssr: false },
+    './plugins/axios',
+    './plugins/message',
+    './plugins/user',
+    './plugins/validation',
+    {src: 'plugins/notification.js', ssr: false},
+    {src: 'plugins/table.js', ssr: false},
+    {src: 'plugins/texteditor.js', ssr: false},
   ],
 
+  axios: {
+    credentials: true,
+    proxy: true,
+  },
+
+  proxy: {
+    '/api/': { target: process.env.BASE_URL, pathRewrite: {'^/api/': ''} },
+  },
+  router: {
+    middleware: ['auth']
+  },
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url:  process.env.BASE_URL+'admin/login', method: 'post', propertyName: 'data.token' },
+          logout: { url:  process.env.BASE_URL+'admin/logout', method: 'post' },
+          user: { url:   process.env.BASE_URL+'admin/profile', method: 'get', propertyName: 'data'}
+        },
+        user : {
+          property: 'data',
+        }
+      }, 
+    },
+    redirect: {
+      login: '/login',
+      logout: '/login',
+      home: '/',
+      callback: '/login',
+    },
+    plugins: [
+      './plugins/auth.js',
+    ]
+  },
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
@@ -47,6 +91,9 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/bootstrap
     'bootstrap-vue/nuxt',
+    '@nuxtjs/axios',
+    // '@nuxtjs/auth-next'
+    '@nuxtjs/auth',
   ],
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
