@@ -1,7 +1,7 @@
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   publicRuntimeConfig: {
-    BASE_URL: process.env.API_BASE,
+    BASE_URL: process.env.BASE_URL,
   },
   head: {
     title: 'rtech_web_admin',
