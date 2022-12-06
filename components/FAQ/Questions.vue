@@ -17,7 +17,7 @@
                     <p v-if="field_errors.description" class="text-danger"> {{ field_errors.description[0]}}</p>
                 </div>
 
-                <button type="submit" @click="createNewFaq" class="btn-sellgiftcards btn mt-3">{{loading ? "Please wait...." : 'Submit FAQ'}}</button>
+                <button type="submit" :disabled="loading" @click="createNewFaq" class="btn-sellgiftcards btn mt-3">{{loading ? "Please wait...." : 'Submit FAQ'}}</button>
 
             </form>
        </div>
@@ -63,6 +63,8 @@
         <MazDialog v-model="openDeleteModal" danger :width="500" title="Delete FAQ" @confirm="deleteThisFaq()">
             Are you sure you want to delete this Faq?
         </MazDialog>
+
+        
   </div>
 </template>
 
@@ -215,7 +217,7 @@ export default {
     /* background: rgba(12, 100, 230, 0.06); */
     border: 1px solid rgba(12, 100, 230, 0.7);
     border-radius: 10px;
-    font-weight: 600;
+    /* font-weight: 600; */
     font-size: 16px;
     line-height: 19px;
     color: #000000;

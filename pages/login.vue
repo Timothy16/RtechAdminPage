@@ -9,7 +9,7 @@
             <div class="password-text">Welcome Admin</div>
           </div>
          <form action="/" v-on:submit.prevent>
-           <p v-if="errors" class="text-danger"> {{ errors}}</p>
+           <!-- <p v-if="errors" class="text-danger"> {{ errors}}</p> -->
             <div class="form-group">
                 <label>Email</label>
                 <input type="email" v-model="email" class="form-control" placeholder="Enter email address">

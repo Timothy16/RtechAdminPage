@@ -3,36 +3,37 @@
         <!-- form to set rate -->
        <div class=" bg-pad">
             <!-- <div class="header-info">Create Giftcard</div> -->
-            <form action=""> 
+            <form action="" @submit.prevent> 
                 <div class="form-group">
                     <label for="">Select Giftcard</label>
-                    <select class="form-select form-control form-select-lg mb-4" aria-label=".form-select-lg example">
-                        <option selected>Select Giftcard</option>
-                        <option value="1">One</option>
-                        <option value="2">Two</option>
-                        <option value="3">Three</option>
+                    <select v-model="giftcardId" class="form-select form-control form-select-lg mb-4" aria-label=".form-select-lg example">
+                        <option value="" selected>Select Giftcard</option>
+                        <option :value="giftcard.id" v-for="(giftcard, index) in giftcards" :key="index">{{giftcard.giftcard_name}}</option>
                     </select>
                 </div>                  
                 <div class="form-group">
                     <label for="">Category Name</label>
-                    <input class="form-control form-control-lg mb-4" type="text" placeholder="Category Name" aria-label=".form-control-lg example">
+                    <input v-model="giftcardCategory" class="form-control form-control-lg mb-4" type="text" placeholder="Category Name" aria-label=".form-control-lg example">
+                    <p  v-if="field_errors.giftcard_name" class="text-danger"> {{ field_errors.giftcard_name[0]}}</p>
                 </div>
 
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label for="">Card Type</label>
-                            <select class="form-select form-control-1 form-select-lg mb-4" aria-label=".form-select-lg example">
-                                <option selected>Select Card Type</option>
-                                <option value="1">Pysical</option>
-                                <option value="2">Virtual</option>
+                            <select v-model="cardType" class="form-select form-control-1 form-select-lg mb-4" aria-label=".form-select-lg example">
+                                <option value="" selected>Select Card Type</option>
+                                <option value="Pysical Card">Pysical Card</option>
+                                <option value="Virtual Card">Virtual Card</option>
                             </select>
-                        </div>    
+                        </div> 
+                        <p  v-if="field_errors.card_type" class="text-danger"> {{ field_errors.card_type[0]}}</p>   
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label for="">Card Rate</label>
-                            <input class="form-control form-control-lg mb-4" type="text" placeholder="Card Rate" aria-label=".form-control-lg example">
+                            <input v-model="amount" class="form-control form-control-lg mb-4" type="text" placeholder="Card Rate" aria-label=".form-control-lg example">
+                            <p  v-if="field_errors.card_amount_rate" class="text-danger"> {{ field_errors.card_amount_rate[0]}}</p>
                         </div>  
                     </div>
                 </div>
@@ -41,17 +42,20 @@
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label for="">Card Currency</label>
-                            <select class="form-select form-control form-select-lg mb-4" aria-label=".form-select-lg example">
-                                <option selected>Select Currency</option>
-                                <option value="#">Naira</option>
-                                <option value="$">Dollar</option>
+                            <select v-model="currency" class="form-select form-control form-select-lg mb-4" aria-label=".form-select-lg example">
+                                <option value="" selected>Select Currency</option>
+                                <option value="NGN">NGN </option>
+                                <option value="$">$</option>
                             </select>
-                        </div>    
+                        </div>
+                        <p  v-if="field_errors.currency" class="text-danger"> {{ field_errors.currency[0]}}</p>    
                     </div>
                     <div class="col-lg-6">
                         <div class="form-group">
                             <label for="">Terms & Conditions</label>
-                            <input class="form-control form-control-lg mb-4" type="text" placeholder="Write text here.." aria-label=".form-control-lg example">
+                            <textarea name="" id="" v-model="terms" class="form-control form-control-lg"></textarea>
+                            <!-- <input v-model="terms" class="form-control form-control-lg mb-4" type="text" placeholder="Write text here.." aria-label=".form-control-lg example"> -->
+                            <p  v-if="field_errors.terms" class="text-danger"> {{ field_errors.terms[0]}}</p>
                         </div>  
                     </div>
                 </div>
@@ -59,13 +63,13 @@
                 <div class="form-group ">
                     <label for="">Is Active?</label>
                     <div class="custom-control custom-switch mb-2" dir="ltr">
-                        <input type="checkbox" class="custom-control-input form-control-lg" id="customSwitchActive">
+                        <input v-model="status" type="checkbox" class="custom-control-input form-control-lg" id="customSwitchActive">
                         <label class="custom-control-label" for="customSwitchActive"></label>
                     </div>
                 </div>
                 
 
-                <div class="btn-sellgiftcards btn">Set Giftcard Rate</div>
+                <button type="submit" @click="setGiftcardCard" class="btn-sellgiftcards btn">{{saving ? 'Saving...' :'Set Giftcard Rate'}}</button>
 
             </form>
        </div>
@@ -73,8 +77,65 @@
 </template>
 
 <script>
+import {mapMutations, mapGetters, mapActions} from 'vuex'
+import Loader from '../Loader.vue'
 export default {
-    
+  components: { Loader },
+   data(){
+        return{
+            giftcardId : "",
+            giftcardCategory : "",
+            terms : "",
+            currency : "",
+            cardType : "",
+            status : 0,
+            amount : ""
+        }
+    },
+    computed: {
+        ...mapGetters({
+            saving : "giftcard/saving",
+            giftcards : "giftcard/giftcards",
+        })
+    },
+    methods : {
+        ...mapActions({
+            getAllGiftcards: "giftcard/getAllGiftcards",
+            createGiftcardRate: "giftcard/createGiftcardRate",  
+        }),
+        ...mapMutations({
+            SET_SAVING: "giftcard/SET_SAVING",
+        }),  
+        async setGiftcardCard(){
+             try {
+                let data = {
+                    giftcard_id : this.giftcardId,
+                    giftcard_name : this.giftcardCategory,
+                    card_type : this.cardType,
+                    card_amount_rate : this.amount,
+                    currency : this.currency,
+                    terms : this.terms,
+                    status : this.status ? 1 : 0
+                }
+                
+                await this.createGiftcardRate(data)
+                
+                this.giftcardCategory = ""
+                this.amount = ""
+                this.status = 0
+                this.terms = ""
+                this.currency = ""
+                this.cardType = ""
+                this.giftcardId = ""
+
+            } catch (error) {
+                this.SET_SAVING(false)
+            }
+        }
+    },
+    mounted(){
+        this.getAllGiftcards()
+    }
 }
 </script>
 
@@ -132,7 +193,7 @@ input[type="file"] {
     /* background: rgba(12, 100, 230, 0.06); */
     border: 1px solid rgba(12, 100, 230, 0.7);
     border-radius: 10px;
-    font-weight: 600;
+    /* font-weight: 600; */
     font-size: 16px;
     line-height: 19px;
     color: #000000;
@@ -144,7 +205,7 @@ input[type="file"] {
     /* background: rgba(12, 100, 230, 0.06); */
     border: 1px solid rgba(12, 100, 230, 0.7);
     border-radius: 10px;
-    font-weight: 600;
+    /* font-weight: 600; */
     font-size: 16px;
     line-height: 19px;
     color: #000000;

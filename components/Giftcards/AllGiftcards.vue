@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-white bg-pad">
+<div class="bg-white bg-pad">
     <!-- <div class="header-info">Completed Transactions</div> -->
         <div class="search-box">
             <form>
@@ -23,83 +23,50 @@
             </form>
         </div>
     <div class="mt-4">
-        <div class="row">
-            <div class="col-lg-3">
+        <div class="row" v-if="giftcards.length > 1 && !loading">
+            <div class="col-lg-3 mb-4" v-for="(giftcard, index) in giftcards" :key="index">
                 <div class="border-edit">
-                    <nuxt-link to="/giftcard/get-a-giftcard">
+                    <nuxt-link :to="'/giftcard/get-a-giftcard?giftcardId=' + giftcard.id">
                         <img src="/images/amazon.png" class="img-fluid" alt="">
                         <div class="text-h">
-                            Amazon
+                            {{giftcard.giftcard_name}}
                         </div>
                     </nuxt-link>
                 </div>
             </div>
-            <div class="col-lg-3">
-                <div class="border-edit">
-                     <img src="/images/american_express.png" class="img-fluid" alt="">
-                     <div class="text-h">
-                        Amazon
-                     </div>
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="border-edit">
-                     <img src="/images/mays.png" class="img-fluid card-left" alt="">
-                     <div class="text-h">
-                        Amazon
-                     </div>
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="border-edit">
-                     <img src="/images/eth.png" class="img-fluid card-left" alt="">
-                     <div class="text-h">
-                        Amazon
-                     </div>
-                </div>
-            </div>
         </div>
-        <div class="row mt-5">
-            <div class="col-lg-3">
-                <div class="border-edit">
-                     <img src="/images/amazon.png" class="img-fluid" alt="">
-                     <div class="text-h">
-                        Amazon
-                     </div>
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="border-edit">
-                     <img src="/images/american_express.png" class="img-fluid" alt="">
-                     <div class="text-h">
-                        Amazon
-                     </div>
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="border-edit">
-                     <img src="/images/mays.png" class="img-fluid card-left" alt="">
-                     <div class="text-h">
-                        Amazon
-                     </div>
-                </div>
-            </div>
-            <div class="col-lg-3">
-                <div class="border-edit">
-                     <img src="/images/eth.png" class="img-fluid card-left" alt="">
-                     <div class="text-h">
-                        Amazon
-                     </div>
-                </div>
-            </div>
+        <div v-else-if="giftcards.length = 0">
+            <h1>No giftcard added</h1>
         </div>
+        <Loader v-else/>
     </div>
-  </div>
+</div>
 </template>
 
 <script>
+import {mapMutations, mapGetters, mapActions} from 'vuex'
+import Loader from '../Loader.vue'
 export default {
-   
+  components: { Loader },
+   data(){
+    return{
+
+    }
+   },
+   computed: {
+    ...mapGetters({
+        loading : "giftcard/loading",
+        giftcards : "giftcard/giftcards",
+    })
+   },
+   methods : {
+    ...mapActions({
+            getAllGiftcards: "giftcard/getAllGiftcards",
+        }),
+   },
+   mounted(){
+        this.getAllGiftcards()
+   }
 }
 </script>
 
@@ -157,5 +124,6 @@ a{
     color: #000000;
     margin-top: 3rem;
     text-align: center;
+    word-break: break-all;
 }
 </style>

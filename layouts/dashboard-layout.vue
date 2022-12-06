@@ -1,4 +1,5 @@
 <template>
+<client-only>
     <div>
         <SideMenu class="desktop-v"/>
         <SideMenuMobile class="mobile-v"/>
@@ -11,6 +12,7 @@
         <notifications position="top right" group="all" />
 
     </div>
+</client-only>
 </template>
 <script >
 

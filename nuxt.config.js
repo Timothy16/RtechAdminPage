@@ -42,9 +42,11 @@ export default {
     './plugins/message',
     './plugins/user',
     './plugins/validation',
+    { src: 'plugins/modal.js', ssr: false },
     {src: 'plugins/notification.js', ssr: false},
     {src: 'plugins/table.js', ssr: false},
     {src: 'plugins/texteditor.js', ssr: false},
+    { src: 'plugins/fileupload.js', ssr: false },
   ],
 
   axios: {
