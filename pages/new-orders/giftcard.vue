@@ -15,6 +15,7 @@ import Giftcard from '@/components/NewOrders/Giftcard.vue'
 export default {
   components: { Header, Giftcard },
    layout : "dashboard-layout",
+    middleware: 'auth',
     head() {
         return {
             title: "Giftcard Order / Rtechbiz",

@@ -14,6 +14,7 @@ import Header from '@/components/Giftcards/Header.vue';
 import SetRate from '@/components/Giftcards/SetRate.vue'
 export default {
   components: { Header, SetRate },
+   middleware: 'auth',
    layout : "dashboard-layout",
     head() {
         return {

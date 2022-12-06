@@ -57,9 +57,9 @@ export default {
   proxy: {
     '/api/': { target: process.env.BASE_URL, pathRewrite: {'^/api/': ''} },
   },
-  router: {
-    middleware: ['auth']
-  },
+  // router: {
+  //   middleware: ['auth']
+  // },
   auth: {
     strategies: {
       local: {
@@ -88,6 +88,7 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
+    '@nuxtjs/moment'
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules

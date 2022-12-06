@@ -62,7 +62,7 @@ export const actions = {
     },
     async updateGiftcard ({commit,}, {giftcard_id, formData}) {
         commit('SET_SAVING', true)
-        const {data} =await  this.$axios.$patch(this.$config.baseURL + `admin/giftcard/${giftcard_id}/update`, formData)
+        const {data} =await  this.$axios.$post(this.$config.baseURL + `admin/giftcard/${giftcard_id}/update?_method=patch`, formData)
         // commit('ADD_FAQ', data)
         commit('SET_SAVING', false)
     }, 

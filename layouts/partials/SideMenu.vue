@@ -19,7 +19,7 @@
           </nuxt-link>
         </li>
         <li class="mb-1">
-           <nuxt-link to="/bank-details" :class="{'active-h' : checkUrl == '/bank-details'}">
+           <nuxt-link to="/bank" :class="{'active-h' : checkUrl == '/bank-details'}">
             <i class='bx bx-dollar-circle'></i>
             <span class="links_name">Bank Details</span>
            </nuxt-link>
@@ -94,8 +94,7 @@
         </li> -->
         <li class="log_out bg-log-out">
           
-            <a :href="'/login?redirect=' + redirectUrl"
-                                v-on:click="logout()">
+            <a :href="'/login?redirect=' + redirectUrl" v-on:click="logout()">
               <i class='bx bx-log-out'></i>
               <span class="links_name">Log out</span>
              </a>

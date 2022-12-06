@@ -18,7 +18,7 @@
                 <div class="text-h"><img src="/images/btc_img.png" alt="" srcset=""></div> 
 
                 <div class="headers">Is Active?</div>
-                <div class="text-h">Yes</div> 
+                <div class="text-h">{{parseInt(giftcard.status) ? "Yes" : "No"}}</div> 
             </div>
         </div>
 
@@ -203,6 +203,7 @@ export default {
                 
                 let giftcard_id =  this.giftcard ? this.giftcard.id : ""
                 await this.updateGiftcard({giftcard_id, formData})
+                this.getGiftcard(giftcard_id)
                 // this.SET_GIFTCARD(null)
                 this.hasDialogOpen = false
             } catch (error) {

@@ -2,23 +2,22 @@
   <div>
     <Header />
     <div class="upper-page">
-       <SetRate />
+       <Bank />
     </div>
    
   </div>
-  
 </template>
 
 <script>
-import Header from '@/components/Giftcards/Header.vue';
-import SetRate from '@/components/Giftcards/SetRate.vue'
+import Header from '@/components/Bank/Header.vue';
+import Bank from '@/components/Bank/BankUser.vue'
 export default {
+  components: { Header, Bank },
    middleware: 'auth',
-  components: { Header, SetRate },
    layout : "dashboard-layout",
     head() {
         return {
-            title: "Set Giftcard Rate / Rtechbiz",
+            title: "Users Details / Rtechbiz",
         };
     },
   name: 'IndexPage'
@@ -26,6 +25,6 @@ export default {
 </script>
 <style scoped>
 .upper-page{
-  padding: 10rem 0 2rem 0;
+  padding: 8rem 0 2rem 0 ;
 }
 </style>

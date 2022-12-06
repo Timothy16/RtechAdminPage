@@ -15,6 +15,7 @@ import Transaction from '@/components/Transaction/Pending.vue'
 export default {
   components: { Header, Transaction },
    layout : "dashboard-layout",
+    middleware: 'auth',
     head() {
         return {
             title: "Pending Transaction / Rtechbiz",

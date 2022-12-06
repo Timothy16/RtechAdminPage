@@ -14,6 +14,7 @@ import Header from '@/components/Cryptocurrency/Header.vue';
 import Crypto from '@/components/Cryptocurrency/Crypto.vue'
 export default {
   components: { Header, Crypto },
+   middleware: 'auth',
    layout : "dashboard-layout",
     head() {
         return {

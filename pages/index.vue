@@ -20,6 +20,7 @@ import Header from '../components/Overview/Header.vue';
 import Overview from '../components/Overview/OverviewSection.vue'
 export default {
   components: { Overview, Header, AdminMobile },
+   middleware: 'auth',
    layout : "dashboard-layout",
     head() {
         return {

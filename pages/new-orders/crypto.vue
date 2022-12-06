@@ -15,6 +15,7 @@ import Crypto from '@/components/NewOrders/Crypto.vue';
 export default {
   components: { Header,  Crypto},
    layout : "dashboard-layout",
+    middleware: 'auth',
     head() {
         return {
             title: "Crypto Order / Rtechbiz",

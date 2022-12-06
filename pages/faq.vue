@@ -15,6 +15,7 @@ import Questions from '@/components/FAQ/Questions.vue'
 export default {
   components: { Header, Questions },
    layout : "dashboard-layout",
+    middleware: 'auth',
     head() {
         return {
             title: "FAQs / Rtechbiz",

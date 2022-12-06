@@ -14,6 +14,7 @@ import Header from '@/components/Users/Header.vue';
 import SingleUser from '@/components/Users/SingleUser.vue'
 export default {
   components: { Header, SingleUser },
+   middleware: 'auth',
    layout : "dashboard-layout",
     head() {
         return {

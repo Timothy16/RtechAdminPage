@@ -15,6 +15,7 @@ import User from '@/components/Users/UserSection.vue'
 export default {
   components: { Header, User },
    layout : "dashboard-layout",
+    middleware: 'auth',
     head() {
         return {
             title: "Users / Rtechbiz",

@@ -15,6 +15,7 @@ import SingleGiftCard from '@/components/NewOrders/SingleGiftCard.vue';
 export default {
   components: { Header, SingleGiftCard },
    layout : "dashboard-layout",
+    middleware: 'auth',
     head() {
         return {
             title: "Giftcard Order / Rtechbiz",

@@ -13,6 +13,7 @@ import AllGiftcards from '@/components/Giftcards/AllGiftcards.vue'
 export default {
   components: { Header, AllGiftcards },
    layout : "dashboard-layout",
+    middleware: 'auth',
     head() {
         return {
             title: "All Giftcards / Rtechbiz",

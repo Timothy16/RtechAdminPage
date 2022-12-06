@@ -15,6 +15,7 @@ import SingleCrypto from '@/components/NewOrders/SingleCrypto.vue';
 export default {
   components: { Header, SingleCrypto },
    layout : "dashboard-layout",
+    middleware: 'auth',
     head() {
         return {
             title: "Crypto Order / Rtechbiz",

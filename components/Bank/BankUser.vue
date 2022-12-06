@@ -1,11 +1,11 @@
 <template>
   <div class="bg-white bg-pad">
-    <nuxt-link to="/users">
+    <nuxt-link to="/bank">
         <i class="fa fa-angle-left angle-edit"></i>
     </nuxt-link>
    
-    <div class="mt-4" v-if="registeredUser && !loading">
-        <MazAvatar :size="100"  v-if="registeredUser.picture" :src="registeredUser.picture" class="mt-3"   bordered />
+    <div class="mt-4" v-if="bank && !loading">
+        <!-- <MazAvatar :size="100"  v-if="registeredUser.picture" :src="registeredUser.picture" class="mt-3"   bordered />
         <MazAvatar :size="100" v-else src="/images/avarter.jpg" class="mt-3"   bordered />
         <div class="personal-info">Personal Information</div>
         <div class="row">
@@ -27,33 +27,25 @@
                 <div class="headers">Phone No</div>
                 <div class="text-h">{{registeredUser.phone}}</div>
             </div>
-        </div>
+        </div> -->
         
-        <div class="headers">Is user active?</div>
-        <div class="text-h">{{parseInt(registeredUser.status) ? 'Yes' : "No"}}</div>
-
         <div class="personal-info mt-5">Bank Account Details</div>
 
         <div class="headers">Account Name</div>
-        <div class="text-h">Depo Steven</div>
+        <div class="text-h">{{bank.account_name}}</div>
 
         <div class="row">
             <div class="col-lg-2">
                 <div class="headers">Account No</div>
-                <div class="text-h">0223893942</div>
+                <div class="text-h">{{bank.account_number}}</div>
             </div>
 
             <div class="col-lg-2">
                 <div class="headers">Bank Name</div>
-                <div class="text-h">Gtb</div>
+                <div class="text-h">{{bank.bank_name}}</div>
             </div>
         </div>
 
-        <div class="d-flex">
-            <div class="btn-delete" v-if="parseInt(registeredUser.status)" @click="setActivity">{{saving ? 'Updating...' : 'Deactivate User'}}</div>
-            <div class="btn-active" v-else @click="setActivity">{{saving ? 'Updating...' : 'Acivate User'}}</div>
-            <!-- <div class="btn-delete ml-3">Delete</div> -->
-        </div>
         
     </div>
     <Loader v-else/>
@@ -66,49 +58,20 @@ export default {
     computed: {
         ...mapGetters({
             loading : "loading",
-            saving : "saving",
-            registeredUser : "registeredUser",
+            bank : "bank",
         }),
     },
     methods : {
         ...mapActions({
-            getUser: "getUser",  
-            suspendUser : "suspendUser"
+            getBankDetail: "getBankDetail",  
         }),
         ...mapMutations({
             SET_LOADING: "SET_LOADING",
-            SET_SAVING: "SET_SAVING",
         }),
-        async deleteThisUser(){
-            try {
-                let user_id = this.userId
-                await this.deleteUserData(user_id)
-                 this.openDeleteModal = false
-            } catch (error) {
-                this.SET_SAVING(false)
-            }
-        },
-        openDelete(value){
-            this.openDeleteModal = true
-            this.userId = value
-        },
-        async setActivity(){
-            try {
-                let data = {
-                    user_id : this.registeredUser.id
-                }
-                let user_id = this.$route.query.userId
-                await this.suspendUser(data)
-                await this.getUser(user_id)
-            } catch (error) {
-                this.SET_SAVING(false)
-            }
-        },
-
     },
     mounted(){
-        let user_id = this.$route.query.userId
-        this.getUser(user_id)
+        let bank_id = this.$route.query.bankId
+        this.getBankDetail(bank_id)
     }
 }
 </script>

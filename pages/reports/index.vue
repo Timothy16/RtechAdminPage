@@ -14,6 +14,7 @@ import Header from '@/components/Report/Header.vue';
 import Report from '@/components/Report/ReportSection.vue'
 export default {
   components: { Header, Report },
+   middleware: 'auth',
    layout : "dashboard-layout",
     head() {
         return {

@@ -14,6 +14,7 @@ import Header from '@/components/Transaction/Header2.vue';
 import Transaction from '@/components/Transaction/SingleTransaction.vue'
 export default {
   components: { Header, Transaction },
+   middleware: 'auth',
    layout : "dashboard-layout",
     head() {
         return {
