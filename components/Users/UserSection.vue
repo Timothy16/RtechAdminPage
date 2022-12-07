@@ -2,16 +2,9 @@
   <div class="">
     <div v-if="!loading">
       <div class="search-box">
-          <form>
-              <div class="form-row align-items-center">
-                  <div class="col-auto">
-                      <input type="search" v-model="userEmail" class="form-control mb-2" id="inlineFormInput" placeholder="Search User by Email or Name">
-                  </div>
-                  <!-- <div class="col-auto">
-                      <button type="submit" class="btn btn-primary mb-2">Search</button>
-                  </div> -->
-              </div>
-          </form>
+            <div class="">
+                <input type="search" v-model="userEmail" class="form-control mb-2" id="inlineFormInput" placeholder="Search User by Email or Name">
+            </div>
       </div>
       <!-- Table -->
       <vuetable ref="vuetable"
@@ -157,8 +150,10 @@ export default {
 }
 .form-control{
     height: 60px;
-    width: 350px;
+    /* width: 350px; */
     border-radius: 15px;
-    
+}
+::placeholder{
+    text-align: center;
 }
 </style>
