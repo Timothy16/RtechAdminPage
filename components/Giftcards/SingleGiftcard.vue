@@ -17,72 +17,11 @@
                 <div class="headers">Card Image</div>
                 <div class="text-h"><img src="/images/btc_img.png" alt="" srcset=""></div> 
 
-                <div class="headers">Is Active?</div>
+                <div class="headers">Is giftcard active?</div>
                 <div class="text-h">{{parseInt(giftcard.status) ? "Yes" : "No"}}</div> 
             </div>
         </div>
-
-        <table class="table mt-3 text-center table-responsive-lg table-lg bg-white">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Giftcard Name</th>
-                    <th scope="col">Card Type</th>
-                    <th scope="col">Rate</th>
-                    <th scope="col">Action</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Amazon [300-500]</td>
-                    <td>Physical</td>
-                    <td>N 2000</td>
-                    <td>
-                        <nuxt-link to="/new-orders/get-a-giftcard">
-                            <div class="btn btn-secondary">
-                                view 
-                            </div>
-                            <div class="btn btn-danger">
-                                Delete 
-                            </div>
-                        </nuxt-link>
-                    </td>
-                </tr>       
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Amazon [300-500]</td>
-                    <td>Physical</td>
-                    <td>N 2000</td>
-                    <td>
-                        <nuxt-link to="/new-orders/get-a-giftcard">
-                            <div class="btn btn-secondary">
-                                view 
-                            </div>
-                            <div class="btn btn-danger">
-                                Delete 
-                            </div>
-                        </nuxt-link>
-                    </td>
-                </tr>       
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Amazon [300-500]</td>
-                    <td>Physical</td>
-                    <td>N 2000</td>
-                    <td>
-                        <nuxt-link to="/new-orders/get-a-giftcard">
-                            <div class="btn btn-secondary">
-                                view 
-                            </div>
-                            <div class="btn btn-danger">
-                                Delete 
-                            </div>
-                        </nuxt-link>
-                    </td>
-                </tr>       
-                </tbody>
-        </table>
+        <GiftcardRates/>
     </div>
     <Loader v-else/>
     
@@ -94,7 +33,7 @@
             </div>
             <ImageUpload/>
             <div class="form-group mt-3">
-                <label for="">Is Active?</label>
+                <label for="">Is giftcard active?</label>
                 <div class="custom-control custom-switch mb-2" dir="ltr">
                     <input v-model="Ustatus" type="checkbox" class="custom-control-input form-control-lg" id="customSwitchActive">
                     <label class="custom-control-label" for="customSwitchActive"></label>
@@ -109,9 +48,10 @@
 
 <script>
 import {mapMutations, mapGetters, mapActions} from 'vuex'
-import ImageUpload from './ImageUpload.vue';
+import ImageUpload from '@/components/Giftcards/ImageUpload.vue';
+import GiftcardRates from '@/components/Giftcards/GiftcardRates.vue';
 export default {
-  components: { ImageUpload },
+  components: { ImageUpload, GiftcardRates},
     data(){
         return {
             // giftcardName : "",
@@ -162,7 +102,8 @@ export default {
         ...mapActions({
             createNewGiftcard: "giftcard/createNewGiftcard",
             getGiftcard: "giftcard/getGiftcard",
-            updateGiftcard : "giftcard/updateGiftcard"
+            updateGiftcard : "giftcard/updateGiftcard",
+            getGiftcardsRate : "giftcard/getGiftcardsRate"
         }),
         ...mapMutations({
             SET_LOADING: "giftcard/SET_LOADING",
@@ -203,7 +144,7 @@ export default {
                 
                 let giftcard_id =  this.giftcard ? this.giftcard.id : ""
                 await this.updateGiftcard({giftcard_id, formData})
-                this.getGiftcard(giftcard_id)
+                // this.getGiftcard(giftcard_id)
                 // this.SET_GIFTCARD(null)
                 this.hasDialogOpen = false
             } catch (error) {
@@ -215,6 +156,7 @@ export default {
     mounted(){
        let giftcard_id = this.$route.query.giftcardId
        this.getGiftcard(giftcard_id)
+       this.getGiftcardsRate(giftcard_id)
     }
 }
 </script>

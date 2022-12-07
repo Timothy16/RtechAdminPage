@@ -1,29 +1,49 @@
 <template>
   <div class="bg-white bg-pad">
-    <nuxt-link to="/new-orders/giftcard">
+    <nuxt-link to="/reports">
         <i class="fa fa-angle-left angle-edit"></i>
     </nuxt-link>
-    <div class="mt-4">
+    <div class="mt-4" v-if="singleReport && !loading">
         <div class="personal-info">Report Details</div>
         <div class="headers">Full Name</div>
-        <div class="text-h">Depo Steven</div>
+        <div class="text-h">{{singleReport.users.name}}</div>
 
         <div class="headers">Email</div>
-        <div class="text-h">user@rtech.com</div>
+        <div class="text-h">{{singleReport.users.email}}</div>
 
         <div class="headers">Report</div>
-        <div class="text-h">I wasn't able to checkout on my page</div>
+        <div class="text-h">{{singleReport.complaint}}</div>
 
         <div class="headers">Image</div>
-        <div class="text-h"><img src="/images/amazon.png" alt="" srcset=""></div>
-
+        <MazGallery v-if="singleReport.image" :images="[singleReport.image]" height="300px"/>
+        <!-- <div class="text-h" v-if="singleReport.image"><img :src="singleReport.image" alt="" srcset=""></div> -->
+        <div class="text-h" v-else>No image</div>
     </div>
+    <Loader v-else/>
   </div>
 </template>
 
 <script>
+import {mapMutations, mapGetters, mapActions} from 'vuex'
 export default {
-   
+    computed: {
+        ...mapGetters({
+            loading : "report/loading",
+            singleReport : "report/singleReport",
+        }),
+    },
+    methods : {
+        ...mapActions({
+            getReport: "report/getReport",  
+        }),
+        ...mapMutations({
+            SET_LOADING: "report/SET_LOADING",
+        }),
+    },
+    mounted(){
+        let report_id = this.$route.query.reportId
+        this.getReport(report_id)
+    }
 }
 </script>
 

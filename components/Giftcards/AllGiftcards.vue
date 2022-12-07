@@ -6,10 +6,8 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <MazInput
-                            
-                            
+                            v-model="giftcard"
                             left-icon-name="search"
-                            
                             :clearable='true'
                             type="text"
                             placeholder="Enter Giftcard Name"
@@ -24,9 +22,9 @@
         </div>
     <div class="mt-4">
         <div class="row" v-if="giftcards.length > 1 && !loading">
-            <div class="col-lg-3 mb-4" v-for="(giftcard, index) in giftcards" :key="index">
+            <div class="col-lg-3 mb-4" v-for="(giftcard, index) in filterAll" :key="index">
                 <div class="border-edit">
-                    <nuxt-link :to="'/giftcard/get-a-giftcard?giftcardId=' + giftcard.id">
+                    <nuxt-link :to="'/giftcard/get-a-giftcard?giftcardId=' + giftcard.id + '&giftcardName=' +  giftcard.giftcard_name">
                         <img src="/images/amazon.png" class="img-fluid" alt="">
                         <div class="text-h">
                             {{giftcard.giftcard_name}}
@@ -50,14 +48,26 @@ export default {
   components: { Loader },
    data(){
     return{
-
+        giftcard : ""
     }
    },
    computed: {
     ...mapGetters({
         loading : "giftcard/loading",
         giftcards : "giftcard/giftcards",
-    })
+    }),
+    filterAll(){
+            try{
+                return this.giftcards.filter((giftcard) => {
+                if(giftcard){
+                    return giftcard.giftcard_name.toLowerCase().includes(this.giftcard.toLowerCase() || this.giftcard.toUpperCase())
+                    }
+                })
+            }
+            catch (error) {
+                console.log(error);
+            }
+        }, 
    },
    methods : {
     ...mapActions({

@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <div v-if="filterAll.length > 0 && !loading">
+    <div v-if="!loading">
       <div class="search-box">
           <form>
               <div class="form-row align-items-center">

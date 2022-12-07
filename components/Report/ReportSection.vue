@@ -1,166 +1,95 @@
 <template>
   <div class="">
-    <div class="search-box">
-        <form>
-            <div class="form-row align-items-center">
-                <div class="col-auto">
-                    <input type="number" class="form-control mb-2" id="inlineFormInput" placeholder="Search User Email Address">
-                </div>
-                <div class="col-auto">
-                    <button type="submit" class="btn btn-primary mb-2">Search</button>
-                </div>
-            </div>
-        </form>
+    <div v-if="!loading">
+      <div class="search-box">
+          <form>
+              <div class="form-row align-items-center">
+                  <div class="col-auto">
+                      <input v-model="reportName" type="search" class="form-control mb-2" id="inlineFormInput" placeholder="Search Email Address or Username">
+                  </div>
+              </div>
+          </form>
+      </div>
+          
+      <vuetable ref="vuetable"
+          :fields="options"
+          :api-mode="false"
+          :data="filterAll" class="bg-white">
+
+          <div slot="action" slot-scope="props">
+            <nuxt-link :to="'/reports/get-a-report?reportId='+ props.rowData.id" class="btn btn-secondary">
+              view    
+            </nuxt-link>
+          </div>
+          <div slot="sn" slot-scope="props">
+            <span>{{ props.rowIndex + 1}}</span>
+          </div>
+          <div slot="name" slot-scope="props">
+            <span>{{ props.rowData.users ? props.rowData.users.name : ""}}</span>
+          </div>
+          <div slot="email" slot-scope="props">
+            <span>{{ props.rowData.users ? props.rowData.users.email : "" }}</span>
+          </div>
+          <div slot="report" slot-scope="props">
+            <span><span>{{ props.rowData.complaint ? props.rowData.complaint : "" }}</span></span>
+          </div>
+          <div slot="image" slot-scope="props">
+            <span>{{ props.rowData.image ? "Yes" : "No" }}</span>
+          </div>  
+          <div slot="created" slot-scope="props">
+            <span>{{$moment(props.rowData.created_at).format('lll')}}</span>
+          </div>              
+      </vuetable>
     </div>
-        
-        <table class="table  text-center table-responsive-lg table-lg bg-white">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Full Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Report</th>
-                <th scope="col">Has Image?</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Favour Ori</td>
-                <td>user@gmail.com</td>
-                <td>I can't see my user detail page</td>
-                <td>Yes</td>
-                <td>
-                    <nuxt-link to="/reports/get-a-report">
-                        <div class="btn btn-secondary">View</div>
-                    </nuxt-link>
-                </td>
-              </tr>   
-              <tr>
-                <th scope="row">1</th>
-                <td>Favour Ori</td>
-                <td>user@gmail.com</td>
-                <td>I can't see my user detail page</td>
-                <td>Yes</td>
-                <td>
-                    <nuxt-link to="/reports/get-a-report">
-                        <div class="btn btn-secondary">View</div>
-                    </nuxt-link>
-                </td>
-                
-              </tr>       
-              <tr>
-                <th scope="row">1</th>
-                <td>Favour Ori</td>
-                <td>user@gmail.com</td>
-                <td>I can't see my user detail page</td>
-                <td>Yes</td>
-                <td>
-                    <nuxt-link to="/reports/get-a-report">
-                        <div class="btn btn-secondary">View</div>
-                    </nuxt-link>
-                </td>
-                
-              </tr>       
-              <tr>
-                <th scope="row">1</th>
-                <td>Favour Ori</td>
-                <td>user@gmail.com</td>
-                <td>I can't see my user detail page</td>
-                <td>Yes</td>
-                <td>
-                    <nuxt-link to="/reports/get-a-report">
-                        <div class="btn btn-secondary">View</div>
-                    </nuxt-link>
-                </td>
-                
-              </tr>       
-              <tr>
-                <th scope="row">1</th>
-                <td>Favour Ori</td>
-                <td>user@gmail.com</td>
-                <td>I can't see my user detail page</td>
-                <td>Yes</td>
-                <td>
-                    <nuxt-link to="/reports/get-a-report">
-                        <div class="btn btn-secondary">View</div>
-                    </nuxt-link>
-                </td>
-              </tr>    
-              <tr>
-                <th scope="row">1</th>
-                <td>Favour Ori</td>
-                <td>user@gmail.com</td>
-                <td>I can't see my user detail page</td>
-                <td>Yes</td>
-                <td>
-                    <nuxt-link to="/reports/get-a-report">
-                        <div class="btn btn-secondary">View</div>
-                    </nuxt-link>
-                </td>
-                
-              </tr>       
-              <tr>
-                <th scope="row">1</th>
-                <td>Favour Ori</td>
-                <td>user@gmail.com</td>
-                <td>I can't see my user detail page</td>
-                <td>Yes</td>
-                <td>
-                    <nuxt-link to="/reports/get-a-report">
-                        <div class="btn btn-secondary">View</div>
-                    </nuxt-link>
-                </td>
-                
-              </tr>       
-              <tr>
-                <th scope="row">1</th>
-                <td>Favour Ori</td>
-                <td>user@gmail.com</td>
-                <td>I can't see my user detail page</td>
-                <td>Yes</td>
-                <td>
-                    <nuxt-link to="/reports/get-a-report">
-                        <div class="btn btn-secondary">View</div>
-                    </nuxt-link>
-                </td>
-                
-              </tr>       
-              <tr>
-                <th scope="row">1</th>
-                <td>Favour Ori</td>
-                <td>user@gmail.com</td>
-                <td>I can't see my user detail page</td>
-                <td>Yes</td>
-                <td>
-                    <nuxt-link to="/reports/get-a-report">
-                        <div class="btn btn-secondary">View</div>
-                    </nuxt-link>
-                </td>
-                
-              </tr>       
-              <tr>
-                <th scope="row">1</th>
-                <td>Favour Ori</td>
-                <td>user@gmail.com</td>
-                <td>I can't see my user detail page</td>
-                <td>Yes</td>
-                <td>
-                    <nuxt-link to="/reports/get-a-report">
-                        <div class="btn btn-secondary">View</div>
-                    </nuxt-link>
-                </td>
-                
-              </tr>                     
-            </tbody>
-          </table>
+    <Loader v-else />
   </div>
 </template>
 
 <script>
+import {mapMutations, mapGetters, mapActions} from 'vuex'
 export default {
-
+    data(){
+        return {
+            reportName : "",
+            options: [
+                { title: 'SN', name: 'sn'}, 
+                { title: 'Full Name',frozen:true, name: 'name',width: "", editor: false}, 
+                { title: 'Email',frozen:true, name: 'email',width: "", editor: false}, 
+                { title: 'Compailts', name: 'report', width: ""}, 
+                { title: 'Has Image?', name: 'image', width: ""}, 
+                { title: 'Created', name: 'created', width: ""}, 
+                { title: 'Action', name: 'action' }, 
+            ]
+        }
+    },
+    computed: {
+        ...mapGetters({
+            loading : "report/loading",
+            reports : "report/reports",
+        }),
+         filterAll(){
+            try{
+                return this.reports.filter((report) => {
+                if(report.users){
+                    return report.users.username.toLowerCase().includes(this.reportName.toLowerCase() || this.reportName.toUpperCase())
+                     || 
+                     report.users.email.toLowerCase().includes(this.reportName.toLowerCase() || this.reportName.toUpperCase())
+                    }
+                })
+            }
+            catch (error) {
+                console.log(error);
+            }
+        }, 
+    },
+    methods : {
+        ...mapActions({
+            getReports: "report/getReports",  
+        }),
+    },
+    mounted(){
+        this.getReports()
+    }
 }
 </script>
 

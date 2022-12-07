@@ -28,9 +28,17 @@
                 <div class="text-h">{{registeredUser.phone}}</div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-sm-12 col-lg-3 col-md-6">
+                <div class="headers">Is user active?</div>
+                <div class="text-h">{{parseInt(registeredUser.status) ? 'Yes' : "No"}}</div>
+            </div>
+            <div class="col-sm-12 col-lg-3 col-md-6">
+                <div class="headers">Date/Time Registered</div>
+                <div class="text-h">{{$moment(registeredUser.created_at).format('lll')}}</div>
+            </div>
+        </div>
         
-        <div class="headers">Is user active?</div>
-        <div class="text-h">{{parseInt(registeredUser.status) ? 'Yes' : "No"}}</div>
 
         <div class="personal-info mt-5">Bank Account Details</div>
 

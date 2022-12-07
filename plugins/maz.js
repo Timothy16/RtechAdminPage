@@ -1,6 +1,6 @@
 import Vue from 'vue'
 
-import { MazPhoneNumberInput, MazDialog, MazCarousel,  MazInput, MazSelect,MazSwitch,MazAvatar,MazImg, MazSearch,  MazBtn, MazCheckbox , MazSlider, MazLoader, MazSpinner, MazRadio, MazProgressBar, MazPicker  } from 'maz-ui'
+import { MazPhoneNumberInput, MazGallery, MazDialog, MazCarousel,  MazInput, MazSelect,MazSwitch,MazAvatar,MazImg, MazSearch,  MazBtn, MazCheckbox , MazSlider, MazLoader, MazSpinner, MazRadio, MazProgressBar, MazPicker  } from 'maz-ui'
 
 Vue.use(MazPhoneNumberInput)
 Vue.use(MazInput)
@@ -19,5 +19,6 @@ Vue.use(MazImg)
 Vue.use(MazSearch)
 Vue.use(MazCarousel)
 Vue.use(MazDialog)
+Vue.use(MazGallery)
 
  

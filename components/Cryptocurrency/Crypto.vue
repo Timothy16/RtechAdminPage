@@ -54,7 +54,7 @@
             </div>
 
              <div slot="status" slot-scope="props">
-                <span>{{ props.rowData.status }}</span>
+                <span>{{parseInt(props.rowData.status) ? "Yes" : "No"}}</span>
             </div>
 
 
@@ -77,8 +77,8 @@
             <div class="form-group mt-3">
                 <label for="">Is Active?</label>
                 <div class="custom-control custom-switch mb-2" dir="ltr">
-                    <input v-model="Ustatus" type="checkbox" class="custom-control-input form-control-lg" id="customSwitchActive">
-                    <label class="custom-control-label" for="customSwitchActive"></label>
+                    <input v-model="Ustatus" type="checkbox" class="custom-control-input form-control-lg" id="customSwitchActive1">
+                    <label class="custom-control-label" for="customSwitchActive1"></label>
                 </div>
                 <p  v-if="field_errors.status" class="text-danger"> {{ field_errors.status[0]}}</p>
             </div>
@@ -206,6 +206,7 @@ export default {
                 
                 let crypto_id = this.crypto ? this.crypto.id : ""
                 await this.updateCryptoRate({parameter, crypto_id})
+                this.getCryptoRates()
                 this.SET_CRYPTO(null)
                 this.hasDialogOpen = false
                 

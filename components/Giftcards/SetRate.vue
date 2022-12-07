@@ -69,7 +69,7 @@
                 </div>
                 
 
-                <button type="submit" @click="setGiftcardCard" class="btn-sellgiftcards btn">{{saving ? 'Saving...' :'Set Giftcard Rate'}}</button>
+                <button type="submit" @click="setGiftcardCard" class="btn-sellgiftcards btn" :disabled="saving">{{saving ? 'Saving...' :'Set Giftcard Rate'}}</button>
 
             </form>
        </div>

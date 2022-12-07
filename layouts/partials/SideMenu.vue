@@ -65,7 +65,7 @@
         <li class="mb-1">
           <nuxt-link to="/reports" :class="{'active-h' : checkUrl == '/reports'}">
             <i class='bx bxs-report'></i>
-            <span class="links_name">Reports</span>
+            <span class="links_name">Complaints</span>
           </nuxt-link>
         </li>
         <!-- <li class="mb-1">

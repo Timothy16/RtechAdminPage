@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <div v-if="banks.length > 0 && !loading">
+    <div v-if="!loading">
       <div class="search-box">
             <form>
                 <div class="row">
@@ -27,25 +27,28 @@
               :api-mode="false"
               :data="filterAll" class="bg-white">
 
-              <div slot="action" slot-scope="props">
-                <nuxt-link :to="'/bank/single-bank?bankId='+ props.rowData.id" class="btn btn-secondary">
-                  view    
-                </nuxt-link>
-              </div>
-              <div slot="sn" slot-scope="props">
+                <div slot="action" slot-scope="props">
+                    <nuxt-link :to="'/bank/single-bank?bankId='+ props.rowData.id" class="btn btn-secondary">
+                    view    
+                    </nuxt-link>
+                </div>
+                <div slot="sn" slot-scope="props">
                       <span>{{ props.rowIndex + 1}}</span>
-                    </div>
-              <div slot="name" slot-scope="props">
-                  <span>{{ props.rowData.account_name }}</span>
-              </div>
+                </div>
+                 <div slot="username" slot-scope="props">
+                    <span>{{ props.rowData.users ? props.rowData.users.username : ""}}</span>
+                </div>
+                <div slot="name" slot-scope="props">
+                    <span>{{ props.rowData.account_name }}</span>
+                </div>
 
-              <div slot="bank_name" slot-scope="props">
-                  <span><span>{{ props.rowData.bank_name }}</span></span>
-              </div>
+                <div slot="bank_name" slot-scope="props">
+                    <span><span>{{ props.rowData.bank_name }}</span></span>
+                </div>
 
-              <div slot="number" slot-scope="props">
-                <span>{{ props.rowData.account_number }}</span>
-              </div>              
+                <div slot="number" slot-scope="props">
+                    <span>{{ props.rowData.account_number }}</span>
+                </div>              
       </vuetable>
     </div>
     <Loader v-else/> 
@@ -60,6 +63,7 @@ export default {
             bankName : "",
             options: [
                 { title: 'SN', name: 'sn'}, 
+                { title: 'Username',frozen:true, name: 'username',width: "", editor: false}, 
                 { title: 'Account Name',frozen:true, name: 'name',width: "", editor: false}, 
                 { title: 'Bank Name', name: 'bank_name', width: ""}, 
                 { title: 'Account Number', name: 'number', width: ""}, 

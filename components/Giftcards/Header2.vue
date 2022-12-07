@@ -1,7 +1,7 @@
 <template>
   <div class="upper-nav">
       <div class="">
-        <span class="header-t">Amazon</span>
+        <span class="header-t">{{checkUrl}}</span>
       </div>
   </div>
 </template>
@@ -10,7 +10,7 @@
 export default {
   computed : {
     checkUrl(){
-      return this.$route.path
+      return this.$route.query.giftcardName
     }
   },
   methods : {
@@ -48,6 +48,7 @@ ul{
     font-weight: 600;
     font-size: 32px;
     line-height: 38px;
+    /* padding-top: 1rem !important; */
 }
 .upper-nav{
     height: 100px;
@@ -58,6 +59,7 @@ ul{
     left: 240px;
     z-index: 100;
     padding: 0 20px;
+    padding-top: 1rem;
     box-shadow: 0 1px 1px rgb(0 0 0 / 10%);
     transition: all 0.5s ease;
 }
