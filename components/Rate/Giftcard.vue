@@ -188,7 +188,7 @@ export default {
                     amount : this.amount
                 }
                 await this.createGiftcardRate(data)
-                await this.getGiftcardsRate()
+                // await this.getGiftcardsRate()
                 this.name = ""
                 this.cardType = ""
                 this.amount = ""

@@ -7,7 +7,7 @@
                 <div class="form-group">
                     <label for="">Giftcard Name</label>
                     <input v-model="giftcardName" class="form-control form-control-lg mb-4" type="text" placeholder="" aria-label=".form-control-lg example">
-                     <p  v-if="field_errors.giftcard_name" class="text-danger"> {{ field_errors.giftcard_name[0]}}</p>
+                    <p  v-if="field_errors.giftcard_name" class="text-danger"> {{ field_errors.giftcard_name[0]}}</p>
                 </div>
                 <div class="form-group mt-3">
                     <label for="">Upload Image</label>
@@ -37,12 +37,12 @@
 
             </form>
 
-            <client-only>
+        <client-only>
             <modal name="profilepicture" :adaptive="true" :height="500">
                 <div class="channel-profile-main">
                     <cropper
                     :src="giftcardImg"
-                    classname="croppersize"
+                    class="croppersize"
                     ref="cropperPic"
                     
                     :stencil-props="{
@@ -247,7 +247,8 @@ input[type="file"] {
   }
   .croppersize{
     border: solid 1px #EEE;
-    height: 490px;
+    height: 500px;
+    background: #fff;
     width: 100%;
   }
 @media screen and (max-width : 578px){

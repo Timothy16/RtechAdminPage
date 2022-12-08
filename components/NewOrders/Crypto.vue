@@ -134,6 +134,7 @@
 </template>
 
 <script>
+import {mapMutations, mapGetters, mapActions} from 'vuex'
 export default {
     data(){
         return{
@@ -143,10 +144,21 @@ export default {
             loading : false
         }
     },
+     computed: {
+        ...mapGetters({
+            loading : "rate/loading",
+        }),
+    },
     methods : {
+         ...mapActions({
+            getCryptoOrders: "orders/getCryptoOrders",
+        }),
         searchMore(){
 
         }
+    },
+    mounted(){
+        this.getCryptoOrders()
     }
 }
 </script>

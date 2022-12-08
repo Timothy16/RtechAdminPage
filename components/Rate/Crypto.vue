@@ -163,7 +163,7 @@ export default {
                     amount : this.amount
                 }
                 await this.createNewCryptoRate(data)
-                await this.getCryptoRate()
+                // await this.getCryptoRate()
                 this.name = ""
                 this.amount = ""
             } catch (error) {

@@ -37,14 +37,29 @@ export const mutations = {
         state.crypto = crypto
     },
     ADD_GIFTCARD (state, giftcard) {
-        Vue.set(state.giftcards, state.giftcards.length, giftcard)
-        // let index = state.giftcards.findIndex(giftcard => giftcard.id === giftcard.id); 
+        // Vue.set(state.giftcards, state.giftcards.length, giftcard)
+        let index = state.giftcards.findIndex(giftcard => giftcard.id === giftcard.id); 
     
         
-        // if( index > -1){
-        //     let theCard = state.giftcards[index]
-        //     Vue.set(state.giftcards, state.giftcards.length, giftcard)
-        // }
+        let length = state.giftcards.length
+        if( index > -1){
+          Vue.set(state.giftcards, index, giftcard)
+        }else{
+          Vue.set(state.giftcards, length, giftcard)
+        }
+    },
+
+    ADD_CRYPTO (state, crypto) {
+        // Vue.set(state.giftcards, state.giftcards.length, giftcard)
+        let index = state.allCryptos.findIndex(crypto => crypto.id === crypto.id); 
+    
+        
+        let length = state.allCryptos.length
+        if( index > -1){
+          Vue.set(state.allCryptos, index, crypto)
+        }else{
+          Vue.set(state.allCryptos, length, crypto)
+        }
     },
     DELETE_GIFTCARD(state, giftcardId){
         let index = state.giftcards.findIndex(giftcard => giftcard.id === giftcardId); 
@@ -81,12 +96,12 @@ export const actions = {
     async createGiftcardRate ({commit}, queryParam) {
         commit('SET_LOADING', true)
         const { data } = await  this.$axios.$post(this.$config.baseURL + 'admin/rate-giftcard/store', queryParam)
-        // commit('ADD_GIFTCARD', data)
+        commit('ADD_GIFTCARD', data)
         commit('SET_LOADING', false)
     },
     async updateGiftcardRate ({commit,}, {parameter, giftcard_id}) {
         commit('SET_SAVING', true)
-        const {data} =await  this.$axios.$patch(this.$config.baseURL + `admin/rate-giftcard/${giftcard_id}/update`, parameter)
+        const {data} =await  this.$axios.$patch(this.$config.baseURL + `admin/rate/${giftcard_id}/update`, parameter)
         // commit('ADD_FAQ', data)
         commit('SET_SAVING', false)
     }, 
@@ -100,7 +115,7 @@ export const actions = {
     async createNewCryptoRate ({commit}, queryParam) {
         commit('SET_LOADING', true)
         const { data } = await  this.$axios.$post(this.$config.baseURL + 'admin/rate-crypto/store', queryParam)
-        // commit('ADD_GIFTCARD', data)
+        commit('ADD_CRYPTO', data)
         commit('SET_LOADING', false)
     },
     async getCryptoRate ({commit}, parameter) {

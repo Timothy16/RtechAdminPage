@@ -15,7 +15,7 @@
             <div class="channel-profile-main" >
                 <cropper
                     :src="profileImg"
-                    classname="croppersize"
+                    class="croppersize"
                     ref="cropperPic"
                     :stencil-props="{
                         handlers: {},
@@ -133,7 +133,8 @@
   }
   .croppersize{
     border: solid 1px #EEE;
-    height: 490px;
+    height: 500px;
+    background: #fff;
     width: 100%;
   }
 

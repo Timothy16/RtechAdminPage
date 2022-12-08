@@ -43,17 +43,17 @@
         <div class="personal-info mt-5">Bank Account Details</div>
 
         <div class="headers">Account Name</div>
-        <div class="text-h">Depo Steven</div>
+        <div class="text-h">{{registeredUser.bank ? registeredUser.bank.account_name : "?"}}</div>
 
         <div class="row">
             <div class="col-lg-2">
                 <div class="headers">Account No</div>
-                <div class="text-h">0223893942</div>
+                <div class="text-h">{{registeredUser.bank ? registeredUser.bank.account_number : "?"}}</div>
             </div>
 
             <div class="col-lg-2">
                 <div class="headers">Bank Name</div>
-                <div class="text-h">Gtb</div>
+                <div class="text-h">{{registeredUser.bank ? registeredUser.bank.bank_name : "?"}}</div>
             </div>
         </div>
 
