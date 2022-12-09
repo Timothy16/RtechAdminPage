@@ -3,8 +3,8 @@
     <div v-if="!loading">
       <div class="search-box">
           <form>
-              <div class="form-row align-items-center">
-                  <div class="col-auto">
+              <div class="">
+                  <div class="">
                       <input v-model="reportName" type="search" class="form-control mb-2" id="inlineFormInput" placeholder="Search Email Address or Username">
                   </div>
               </div>
@@ -55,7 +55,7 @@ export default {
                 { title: 'SN', name: 'sn'}, 
                 { title: 'Full Name',frozen:true, name: 'name',width: "", editor: false}, 
                 { title: 'Email',frozen:true, name: 'email',width: "", editor: false}, 
-                { title: 'Compailts', name: 'report', width: ""}, 
+                { title: 'Compailts', name: 'report', width: "500px"}, 
                 { title: 'Has Image?', name: 'image', width: ""}, 
                 { title: 'Created', name: 'created', width: ""}, 
                 { title: 'Action', name: 'action' }, 
@@ -101,8 +101,10 @@ export default {
 }
 .form-control{
     height: 60px;
-    width: 350px;
+    /* width: 350px; */
     border-radius: 15px;
-    
+}
+::placeholder{
+  text-align: center;
 }
 </style>

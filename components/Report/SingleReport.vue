@@ -11,6 +11,12 @@
         <div class="headers">Email</div>
         <div class="text-h">{{singleReport.users.email}}</div>
 
+        <div class="headers">Phone</div>
+        <div class="text-h">{{singleReport.users.phone}}</div>
+
+        <div class="headers">Username</div>
+        <div class="text-h">{{singleReport.users.username}}</div>
+
         <div class="headers">Report</div>
         <div class="text-h">{{singleReport.complaint}}</div>
 

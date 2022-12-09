@@ -101,7 +101,7 @@ export const actions = {
     },
     async updateGiftcardRate ({commit,}, {parameter, giftcard_id}) {
         commit('SET_SAVING', true)
-        const {data} =await  this.$axios.$patch(this.$config.baseURL + `admin/rate/${giftcard_id}/update`, parameter)
+        const {data} =await  this.$axios.$patch(this.$config.baseURL + `admin/rate-giftcard/${giftcard_id}/update`, parameter)
         // commit('ADD_FAQ', data)
         commit('SET_SAVING', false)
     }, 
@@ -130,7 +130,6 @@ export const actions = {
         // commit('ADD_FAQ', data)
         commit('SET_SAVING', false)
     }, 
-
     async deleteCryptoRate ({commit,}, queryParam) {
         commit('SET_SAVING', true)
         const {data} =await  this.$axios.$delete(this.$config.baseURL + `admin/rate-crypto/${queryParam}/delete`)
