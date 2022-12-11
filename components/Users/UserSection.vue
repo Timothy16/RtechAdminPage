@@ -51,7 +51,7 @@
     </div>
     <Loader v-else/>
     <MazDialog v-model="openDeleteModal" danger :width="500" title="Delete User" @confirm="deleteThisUser()">
-      Are you sure you want to delete this Faq?
+      Are you sure you want to delete this User?
     </MazDialog>
   </div>
 </template>

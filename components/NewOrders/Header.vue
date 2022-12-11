@@ -6,12 +6,12 @@
       <div class="links">
         <ul>
           <li>
-            <nuxt-link to="/new-orders/giftcard" :class="{'u-active' : checkUrl == '/new-orders/giftcard'}">
+            <nuxt-link to="/new-orders/giftcard" :class="{'u-active' : checkUrl == '/new-orders/giftcard' || checkUrl == '/new-orders/get-a-giftcard'}">
               Giftcard orders
             </nuxt-link>
           </li>
           <li class="ml-3">
-            <nuxt-link to="/new-orders/crypto" :class="{'u-active' : checkUrl == '/new-orders/crypto'}">
+            <nuxt-link to="/new-orders/crypto" :class="{'u-active' : checkUrl == '/new-orders/crypto' || checkUrl == '/new-orders/get-a-crypto'}">
               Crypto Orders
             </nuxt-link>
           </li>

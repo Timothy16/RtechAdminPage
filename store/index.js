@@ -10,7 +10,9 @@ export const state = () => ({
     registeredUser : null,
     saving : false,
     banks : [],
-    bank : null
+    bank : null,
+    contacts : [],
+    newsletters : []
   })
   
   export const getters = {
@@ -23,7 +25,9 @@ export const state = () => ({
     banks : state => state.banks,
     bank : state => state.bank,
     registeredUsers : state => state.registeredUsers,
-    registeredUser : state => state.registeredUser
+    registeredUser : state => state.registeredUser,
+    contacts : state => state.contacts,
+    newsletters : state => state.newsletters
   }
 
 export const mutations = {
@@ -48,6 +52,12 @@ export const mutations = {
   SET_BANKS(state, banks)   {
     state.banks = banks
   },
+  SET_CONTACTS (state, contacts)   {
+    state.contacts = contacts
+  },
+  SET_NEWSLETTERS (state, newsletters)   {
+    state.newsletters = newsletters
+  },
   SET_BANK(state, bank)   {
     state.bank = bank
   },
@@ -55,6 +65,12 @@ export const mutations = {
     let index = state.registeredUsers.findIndex(user => user.id === userId); 
     if(index > -1)
       Vue.delete(state.registeredUsers, index)
+  },
+
+  DELETE_CONTACT_US(state, contactId){
+    let index = state.contacts.findIndex(contact => contact.id === contactId); 
+    if(index > -1)
+      Vue.delete(state.contacts, index)
   },
 
 }
@@ -105,4 +121,25 @@ export const actions = {
     commit('SET_LOADING', false)
   },  
 
+  async getContactUs ({commit,}, queryParam) {
+    commit('SET_LOADING', true)
+    const {data} =await  this.$axios.$get(this.$config.baseURL + `admin/contacts`, queryParam)
+    commit('SET_CONTACTS', data)
+    commit('SET_LOADING', false)
+  }, 
+
+  async deleteContactUs ({commit,}, queryParam) {
+    commit('SET_SAVING', true)
+    const {data} =await  this.$axios.$delete(this.$config.baseURL + `admin/contact/${queryParam}/delete`)
+    commit('DELETE_CONTACT_US', queryParam)
+    commit('SET_SAVING', false)
+  },  
+
+  async getNewsLetters ({commit,}, queryParam) {
+    commit('SET_LOADING', true)
+    const {data} =await  this.$axios.$get(this.$config.baseURL + `admin/newsletters`, queryParam)
+    commit('SET_NEWSLETTERS', data)
+    commit('SET_LOADING', false)
+  }, 
+  
 }

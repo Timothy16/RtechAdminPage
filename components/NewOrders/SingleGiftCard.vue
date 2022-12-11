@@ -1,49 +1,153 @@
 <template>
   <div class="bg-white bg-pad">
-    <nuxt-link to="/new-orders/giftcard">
-        <i class="fa fa-angle-left angle-edit"></i>
-    </nuxt-link>
-    <div class="mt-4">
-        <div class="personal-info">Giftcard Order</div>
-        <div class="headers">Full Name</div>
-        <div class="text-h">Depo Steven</div>
+    <div v-if="order && !loading">
+        <nuxt-link to="/new-orders/giftcard">
+            <i class="fa fa-angle-left angle-edit"></i>
+        </nuxt-link>
+        <div class="mt-4">
+            <div class="personal-info text-center">Giftcard Order #{{order.id}}  </div>
+            <hr>
+            <div class="personal-info">Giftcard Details </div>
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="headers">Giftcard Name</div>
+                    <div class="text-h">{{order.giftcard_rate ? order.giftcard_rate.giftcard.giftcard_name : ""}}</div>
+                </div>
 
-        <div class="headers">Email</div>
-        <div class="text-h">user@rtech.com</div>
-
-        <div class="row">
-            <div class="col-lg-2">
-                <div class="headers">Card Name</div>
-                <div class="text-h">Amazon</div>
+                <div class="col-lg-5">
+                    <div class="headers">Giftcard Category Name</div>
+                    <div class="text-h">{{order.giftcard_rate ? order.giftcard_rate.giftcard_name : ""}}</div>
+                </div>
             </div>
 
-            <div class="col-lg-2">
-                <div class="headers">Card Type</div>
-                <div class="text-h">Physical</div>
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="headers">Card Type</div>
+                    <div class="text-h">{{order ? order.card_type : ""}}</div>
+                </div>
+
+                <div class="col-lg-5">
+                    <div class="headers">Amount</div>
+                    <div class="text-h">{{order ? order.amount : ""}}</div>
+                </div>
+            </div>
+
+            <div class="headers">Transaction Image(s)</div>
+            <MazGallery :images="imagesUrls" />
+            <hr>
+            <div class="personal-info">Orderd By : </div>
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="headers">Full Name</div>
+                    <div class="text-h">{{order.user ? order.user.name : ""}}</div>
+                </div>
+
+                <div class="col-lg-5">
+                    <div class="headers">User Name </div>
+                    <div class="text-h">{{order.user ? order.user.username : ""}}</div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="headers">Email</div>
+                    <div class="text-h">{{order.user ? order.user.email : ""}}</div>
+                </div>
+
+                <div class="col-lg-5">
+                    <div class="headers">Phone Number </div>
+                    <div class="text-h">{{order.user ? order.user.phone : ""}}</div>
+                </div>
+            </div>
+
+            <div class="headers">Profile Picture</div>
+            <MazAvatar
+                :src="order.user ? order.user.picture :'/images/avarter.jpg'"
+                :size="120"
+                editable
+                class=""
+                bordered
+            />
+            <hr>
+
+            <div class="personal-info ">Bank Details : </div>
+            <div class="row mb-3">
+                <div class="col-lg-4">
+                    <div class="headers">Account Name</div>
+                    <div class="text-h">{{order.user.bank ? order.user.bank.account_name : "?"}}</div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="headers">Bank Name</div>
+                    <div class="text-h">{{order.user.bank ? order.user.bank.bank_name : "?"}}</div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="headers">Account Number</div>
+                    <div class="text-h">{{order.user.bank ? order.user.bank.account_number : "?"}}</div>
+                </div>
+            </div>
+            <hr>
+            <div class="headers ">Giftcard Rate Amount :</div>
+            <div class="text-h">{{order.giftcard_rate ? order.giftcard_rate.currency : ""}}{{order.giftcard_rate ? order.giftcard_rate.card_amount_rate : "" | currency}}</div>
+
+            <div class="headers">Amount(quantity user want to trade) :</div>
+            <div class="text-h">{{order ? order.amount : ""}}</div>
+
+            <div class="headers">Total(user get) :</div>
+            <div class="text-h">{{order.giftcard_rate ? order.giftcard_rate.currency : ""}}{{total | currency}}</div>
+
+             <div class="headers">Order response :</div>
+            <div class="text-h">{{order ? order.response : "No response"}}</div>
+
+            <div class="d-flex">
+                <div class="btn-active">Accept</div>
+                <div class="btn-delete ml-3">Decline</div>
             </div>
         </div>
-
-        <div class="headers">Card Amount</div>
-        <div class="text-h">Amazon</div>
-
-        <div class="headers">Card Image</div>
-        <div class="text-h"><img src="/images/amazon.png" alt="" srcset=""></div>
-
-        <div class="d-flex">
-            <div class="btn-active">Accept</div>
-            <div class="btn-delete ml-3">Decline</div>
-        </div>
-        
-
-
-
+    </div>
+    <div v-else>
+        <Loader />
     </div>
   </div>
 </template>
 
 <script>
+import {mapMutations, mapGetters, mapActions} from 'vuex'
 export default {
-   
+    computed: {
+        ...mapGetters({
+            loading : "orders/loading",
+            order : "orders/giftcardOrder",
+        }),
+        total(){
+            if(this.order){
+                let total = this.order.giftcard_rate.card_amount_rate * this.order.amount
+                return total ? total : ""
+            }
+            return ""
+        },
+        imagesUrls(){
+            let imageUrl = []
+            if(this.order){
+                this.order.giftcard_image.forEach((image) => {
+                    imageUrl.push(image.giftcard_image)
+                })
+                return imageUrl
+            }
+            return null
+        },
+    },
+    methods : {
+        ...mapActions({
+            getGiftcardOrder: "orders/getGiftcardOrder",  
+        }),
+        ...mapMutations({
+            SET_LOADING: "orders/SET_LOADING",
+        }),
+    },
+    mounted(){
+        let order_id = this.$route.query.giftcardOrderId
+        this.getGiftcardOrder(order_id)
+    }
 }
 </script>
 
@@ -60,7 +164,7 @@ export default {
     font-size: 24px;
     line-height: 28px;
     color: #000000;
-    margin-bottom: 2rem;
+    margin-bottom: .5rem;
 }
 .headers{
     font-style: normal;
@@ -73,7 +177,7 @@ export default {
 .text-h{
     font-style: normal;
     font-weight: 600;
-    font-size: 24px;
+    font-size: 20px;
     /* line-height: 28px; */
     color: #000000;
     margin-top: .4rem;

@@ -68,12 +68,18 @@
             <span class="links_name">Complaints</span>
           </nuxt-link>
         </li>
-        <!-- <li class="mb-1">
-          <nuxt-link to="/dashboard/help" :class="{'active-h' : checkUrl == '/dashboard/help'}">
-            <i class='bx bx-book-alt' ></i>
-            <span class="links_name">Help</span>
+        <li class="mb-1">
+          <nuxt-link to="/newsletters" :class="{'active-h' : checkUrl == '/dashboard/help'}">
+            <i class='bx bx-news' ></i>
+            <span class="links_name">Newsletters</span>
           </nuxt-link>
-        </li> -->
+        </li>
+        <li class="mb-1">
+          <nuxt-link to="/contact-us" :class="{'active-h' : checkUrl == '/dashboard/help'}">
+            <i class='bx bx-message-check'></i>
+            <span class="links_name">Contact Us</span>
+          </nuxt-link>
+        </li>
         <!-- <li>
           <a href="#">
             <i class='bx bx-message' ></i>
