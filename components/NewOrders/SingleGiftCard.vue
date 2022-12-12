@@ -99,24 +99,43 @@
             <div class="text-h">{{order ? order.response : "No response"}}</div>
 
             <div class="d-flex">
-                <div class="btn-active">Accept</div>
-                <div class="btn-delete ml-3">Decline</div>
+                <button class="btn-active" @click.prevent="openAccept()">{{saving ? 'Accepting Order...' : 'Accept Order'}}</button>
+                <button class="btn-delete ml-3" @click.prevent="openReject()">Reject Order</button>
             </div>
         </div>
     </div>
     <div v-else>
         <Loader />
     </div>
+    <MazDialog v-model="openAccModal" primary :width="500" title="Accept Trade" @confirm="acceptOrder()">
+      Are you sure you want to accept this Trade?
+    </MazDialog>
+    <MazDialog v-model="openRejModal" danger :width="500" title="Reject Trade" @confirm="rejectOrder()">
+      Are you sure you want to reject this Trade?
+      <div class="form-group">
+        <label for="" class="mt-2"><strong>Message*</strong></label>
+        <textarea name="" class="form-control" id="" cols="30" v-model="message" rows="5"></textarea>
+        <p  v-if="field_errors.response" class="text-danger"> {{ field_errors.response[0]}}</p>
+      </div>
+    </MazDialog>
   </div>
 </template>
 
 <script>
 import {mapMutations, mapGetters, mapActions} from 'vuex'
 export default {
+    data(){
+        return {
+            openAccModal : false,
+            openRejModal : false,
+            message : ""
+        }
+    },
     computed: {
         ...mapGetters({
             loading : "orders/loading",
             order : "orders/giftcardOrder",
+            saving : "orders/saving"
         }),
         total(){
             if(this.order){
@@ -138,11 +157,49 @@ export default {
     },
     methods : {
         ...mapActions({
-            getGiftcardOrder: "orders/getGiftcardOrder",  
+            getGiftcardOrder: "orders/getGiftcardOrder",
+            acceptRejectGiftcardOrder : "orders/acceptRejectGiftcardOrder"  
         }),
         ...mapMutations({
             SET_LOADING: "orders/SET_LOADING",
+            SET_SAVING : "orders/SET_SAVING"
         }),
+        openAccept(){
+            this.openAccModal = true
+        },
+        openReject(){
+            this.openRejModal = true
+        },
+        async acceptOrder(){
+            
+            try {
+                let parameter = {
+                   id : this.order.id,
+                   status : 1,
+                   response : "Order Accepted"
+                }
+
+                await this.acceptRejectGiftcardOrder(parameter)
+                this.openAccModal = false
+            } catch (error) {
+                this.SET_SAVING(false)
+            }
+        },
+        async rejectOrder(){
+            
+            try {
+                let parameter = {
+                   id : this.order.id,
+                   status : 3,
+                   response : this.message
+                }
+
+                await this.acceptRejectGiftcardOrder(parameter)
+                this.openRejModal = false
+            } catch (error) {
+                this.SET_SAVING(false)
+            }
+        },
     },
     mounted(){
         let order_id = this.$route.query.giftcardOrderId
@@ -195,6 +252,8 @@ export default {
     color: #FFA346;
     margin-top: 2rem;
     cursor: pointer;
+    border: none;
+    outline: none;
 }
 .btn-delete{
     padding: 20px;
@@ -209,5 +268,7 @@ export default {
     color: #ff0000;
     margin-top: 2rem;
     cursor: pointer;
+     border: none;
+    outline: none;
 }
 </style>

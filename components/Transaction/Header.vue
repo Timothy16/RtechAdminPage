@@ -11,8 +11,8 @@
             </nuxt-link>
           </li>
           <li class="ml-3">
-            <nuxt-link to="/transactions/pending" :class="{'u-active' : checkUrl == '/transactions/pending'}">
-              Pending 
+            <nuxt-link to="/transactions/accepted" :class="{'u-active' : checkUrl == '/transactions/accepted'}">
+              Accepted 
             </nuxt-link>
           </li>
           <li class="ml-3">

@@ -32,7 +32,7 @@
         </li>
          <li class="mb-1">
           <nuxt-link to="/transactions" :class="{'active-h' : checkUrl == '/transactions' 
-          || checkUrl == '/transactions/pending' || checkUrl == '/transactions/completed' || checkUrl == '/transactions/rejected'}">
+          || checkUrl == '/transactions/accepted' || checkUrl == '/transactions/completed' || checkUrl == '/transactions/rejected'}">
             <i class='bx bxs-wallet'></i>
             <span class="links_name">Transactions</span>
           </nuxt-link>

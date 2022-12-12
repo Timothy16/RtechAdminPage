@@ -12,12 +12,12 @@
         <div class="text-h">{{bank.account_name}}</div>
 
         <div class="row">
-            <div class="col-lg-2">
+            <div class="col-lg-5">
                 <div class="headers">Account No</div>
                 <div class="text-h">{{bank.account_number}}</div>
             </div>
 
-            <div class="col-lg-2">
+            <div class="col-lg-5">
                 <div class="headers">Bank Name</div>
                 <div class="text-h">{{bank.bank_name}}</div>
             </div>
@@ -27,21 +27,21 @@
          <MazAvatar :size="100"  v-if="bank.users.picture" :src="bank.users.picture" class="mt-3"   bordered />
         <MazAvatar :size="100" v-else src="/images/avarter.jpg" class="mt-3"   bordered />
         <div class="row">
-            <div class="col-sm-12 col-lg-3 col-md-6">
+            <div class="col-sm-12 col-lg-5 col-md-6">
                 <div class="headers">Full Name</div>
                 <div class="text-h">{{bank.users.name}}</div>
             </div>
-            <div class="col-sm-12 col-lg-3 col-md-6">
+            <div class="col-sm-12 col-lg-5 col-md-6">
                 <div class="headers">Email</div>
                 <div class="text-h">{{bank.users.email}}</div>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-12 col-lg-3 col-md-6">
+            <div class="col-sm-12 col-lg-5 col-md-6">
                 <div class="headers">Username</div>
                 <div class="text-h">{{bank.users.username}}</div>
             </div>
-            <div class="col-sm-12 col-lg-3 col-md-6">
+            <div class="col-sm-12 col-lg-5 col-md-6">
                 <div class="headers">Phone No</div>
                 <div class="text-h">{{bank.users.phone}}</div>
             </div>

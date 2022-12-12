@@ -10,15 +10,15 @@
 </template>
 
 <script>
-import Header from '@/components/Transaction/Header2.vue';
-import Transaction from '@/components/Transaction/SingleTransaction.vue'
+import Header from '@/components/Transaction/Header.vue';
+import Transaction from '@/components/Transaction/Accepted'
 export default {
   components: { Header, Transaction },
-   middleware: 'auth',
    layout : "dashboard-layout",
+    middleware: 'auth',
     head() {
         return {
-            title: "All Transaction / Rtechbiz",
+            title: "Pending Transaction / Rtechbiz",
         };
     },
   name: 'IndexPage'

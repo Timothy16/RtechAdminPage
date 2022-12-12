@@ -80,4 +80,20 @@ export const actions = {
     commit('SET_CRYPTO_ORDERS', data)
     commit('SET_LOADING', false)
   }, 
+
+  async acceptRejectGiftcardOrder ({commit,}, parameter) {
+    commit('SET_SAVING', true)
+    const {data} =await  this.$axios.$post(this.$config.baseURL + `admin/order/status/giftcard`, parameter)
+    // commit('SET_CRYPTO_ORDERS', data)
+    commit('SET_SAVING', false)
+  }, 
+
+  async acceptRejectCryptoOrder ({commit,}, parameter) {
+    commit('SET_SAVING', true)
+    const {data} =await  this.$axios.$post(this.$config.baseURL + `admin/order/status/crypto`, parameter)
+    // commit('SET_CRYPTO_ORDERS', data)
+    commit('SET_SAVING', false)
+  }, 
+
+
 }

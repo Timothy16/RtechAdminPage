@@ -1,30 +1,39 @@
 <template>
   <div class="bg-white bg-pad">
     <div v-if="order && !loading">
-        <nuxt-link to="/new-orders/crypto">
+        <a @click="$router.back()">
             <i class="fa fa-angle-left angle-edit"></i>
-        </nuxt-link>
-        <div class="mt-4">
-            <div class="personal-info text-center">Crypto Order #{{order.id}}  </div>
+        </a>
+        <!-- <div class="mt-4">
+            <div class="personal-info text-center">Giftcard Order #{{order.id}}  </div>
             <hr>
-            <div class="personal-info">Crypto Details </div>
+            <div class="personal-info">Giftcard Details </div>
             <div class="row">
-                <div class="col-lg-4">
-                    <div class="headers">Crypto Category Name</div>
-                    <div class="text-h">{{order.crypto_rate ? order.crypto_rate.crypto_name : ""}}</div>
+                <div class="col-lg-5">
+                    <div class="headers">Giftcard Name</div>
+                    <div class="text-h">{{order.giftcard_rate ? order.giftcard_rate.giftcard.giftcard_name : ""}}</div>
                 </div>
-               <div class="col-lg-2">
+
+                <div class="col-lg-5">
+                    <div class="headers">Giftcard Category Name</div>
+                    <div class="text-h">{{order.giftcard_rate ? order.giftcard_rate.giftcard_name : ""}}</div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-5">
+                    <div class="headers">Card Type</div>
+                    <div class="text-h">{{order ? order.card_type : ""}}</div>
+                </div>
+
+                <div class="col-lg-5">
                     <div class="headers">Amount</div>
                     <div class="text-h">{{order ? order.amount : ""}}</div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="headers">Crypto wallet</div>
-                    <div class="text-h" style="word-break : break-all">{{order.crypto_rate ? order.crypto_rate.crypto_wallet : ""}}</div>
                 </div>
             </div>
 
             <div class="headers">Transaction Image(s)</div>
-            <!-- <MazGallery :images="imagesUrls" /> -->
+            <MazGallery :images="imagesUrls" />
             <hr>
             <div class="personal-info">Orderd By : </div>
             <div class="row">
@@ -77,14 +86,14 @@
                 </div>
             </div>
             <hr>
-            <div class="headers ">Crypto Rate Amount :</div>
-            <div class="text-h">N {{order.crypto_rate ? order.crypto_rate.crypto_amount : "" | currency}}</div>
+            <div class="headers ">Giftcard Rate Amount :</div>
+            <div class="text-h">{{order.giftcard_rate ? order.giftcard_rate.currency : ""}}{{order.giftcard_rate ? order.giftcard_rate.card_amount_rate : "" | currency}}</div>
 
             <div class="headers">Amount(quantity user want to trade) :</div>
             <div class="text-h">{{order ? order.amount : ""}}</div>
 
             <div class="headers">Total(user get) :</div>
-            <div class="text-h">N {{total | currency}}</div>
+            <div class="text-h">{{order.giftcard_rate ? order.giftcard_rate.currency : ""}}{{total | currency}}</div>
 
              <div class="headers">Order response :</div>
             <div class="text-h">{{order ? order.response : "No response"}}</div>
@@ -93,13 +102,13 @@
                 <button class="btn-active" @click.prevent="openAccept()">{{saving ? 'Accepting Order...' : 'Accept Order'}}</button>
                 <button class="btn-delete ml-3" @click.prevent="openReject()">Reject Order</button>
             </div>
-        </div>
+        </div> -->
     </div>
     <div v-else>
         <Loader />
     </div>
-    <MazDialog v-model="openAccModal" primary :width="500" title="Accept Trade" @confirm="acceptOrder()">
-      Are you sure you want to accept this Trade?
+    <MazDialog v-model="openAccModal" primary :width="500" title="Complete Trade" @confirm="acceptOrder()">
+      Are you sure you want to complete this Trade?
     </MazDialog>
     <MazDialog v-model="openRejModal" danger :width="500" title="Reject Trade" @confirm="rejectOrder()">
       Are you sure you want to reject this Trade?
@@ -125,12 +134,12 @@ export default {
     computed: {
         ...mapGetters({
             loading : "orders/loading",
-            order : "orders/cryptoOrder",
+            order : "orders/giftcardOrder",
             saving : "orders/saving"
         }),
         total(){
             if(this.order){
-                let total = this.order.crypto_rate.crypto_amount * this.order.amount
+                let total = this.order.giftcard_rate.card_amount_rate * this.order.amount
                 return total ? total : ""
             }
             return ""
@@ -148,9 +157,8 @@ export default {
     },
     methods : {
         ...mapActions({
-            getCryptoOrder: "orders/getCryptoOrder", 
-            acceptRejectCryptoOrder : "orders/acceptRejectCryptoOrder"
-            
+            getSingleTransactions: "transactions/getSingleTransactions",
+            acceptRejectGiftcardOrder : "orders/acceptRejectGiftcardOrder"  
         }),
         ...mapMutations({
             SET_LOADING: "orders/SET_LOADING",
@@ -168,10 +176,10 @@ export default {
                 let parameter = {
                    id : this.order.id,
                    status : 1,
-                   response : "Order Accepted"
+                   response : "Order Completed"
                 }
 
-                await this.acceptRejectCryptoOrder(parameter)
+                await this.acceptRejectGiftcardOrder(parameter)
                 this.openAccModal = false
             } catch (error) {
                 this.SET_SAVING(false)
@@ -186,17 +194,16 @@ export default {
                    response : this.message
                 }
 
-                await this.acceptRejectCryptoOrder(parameter)
+                await this.acceptRejectGiftcardOrder(parameter)
                 this.openRejModal = false
             } catch (error) {
                 this.SET_SAVING(false)
             }
         },
-
     },
     mounted(){
-        let order_id = this.$route.query.cryptoOrderId
-        this.getCryptoOrder(order_id)
+        let order_id = this.$route.query.orderId
+        this.getSingleTransactions(order_id)
     }
 }
 </script>
@@ -261,7 +268,7 @@ export default {
     color: #ff0000;
     margin-top: 2rem;
     cursor: pointer;
-    border: none;
+     border: none;
     outline: none;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="">
     <div class="bg-white">
-        <div class="header-info">Rejected Transactions</div>
+        <div class="header-info">Accepted Transactions</div>
         <div class="search-box pt-3">
             <form>
                 <div class="row">
@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <!-- <div class="mt-1">
-                        <button type="submit" class="btn btn-secondary mb-2" @click="searchMore">Search</button>
+                        <button type="submit" class="btn btn-secondary mb-2">Search</button>
                 </div> -->
             </form>
         </div>
@@ -42,7 +42,7 @@
                 :api-mode="false"
                 :data="filterAll" class="p-3 table-responsive-lg bg-white mt-3 table-lg">
                 
-               <div slot="action" slot-scope="props">
+                <div slot="action" slot-scope="props">
                     <nuxt-link :to="'/transactions/get-giftcard-transaction?orderId='+ props.rowData.id" class="btn btn-secondary" v-if="props.rowData.product_type === 'Giftcard'">
                         View    
                     </nuxt-link>
@@ -113,7 +113,7 @@ export default {
     computed: {
         ...mapGetters({
             loading : "transactions/loading",
-            transactions : "transactions/rejectedTransactions"
+            transactions : "transactions/acceptedTransactions"
         }),
         filterAll(){
             try{
@@ -130,7 +130,7 @@ export default {
     },
     methods : {
          ...mapActions({
-            getRejectedTransactions: "transactions/getRejectedTransactions",
+            getAcceptedTransactions: "transactions/getAcceptedTransactions",
             // getGiftcardFilter : "orders/getGiftcardFilter"
         }),
         ...mapMutations({
@@ -148,11 +148,10 @@ export default {
         //     this.pickerValue2 = ''
         //     await this.getGiftcardOrders()
         // }
-       
 
     },
     mounted(){
-        this.getRejectedTransactions()
+        this.getAcceptedTransactions()
     }
 }
 </script>
