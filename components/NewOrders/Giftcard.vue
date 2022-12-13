@@ -47,7 +47,7 @@
                 :data="filterAll" class="bg-white mt-5 p-3">
                 
                 <div slot="action" slot-scope="props">
-                    <nuxt-link :to="'/new-orders/get-a-giftcard?giftcardOrderId='+ props.rowData.id" class="btn btn-secondary">
+                    <nuxt-link :to="'/new-orders/get-a-giftcard?giftcardOrderId='+ props.rowData.id" class="btn btn-secondary btn-sm">
                         View    
                     </nuxt-link>
                 </div>
@@ -136,9 +136,6 @@ export default {
         ...mapMutations({
             SET_LOADING: "orders/SET_LOADING",
         }),
-        // searchMore(){
-        //     console.log("date", this.pickerValue2)
-        // }
         async searchMore(){
             try {
                 let data = this.pickerValue2

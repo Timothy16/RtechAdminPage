@@ -13,7 +13,7 @@
               :data="filterAll" class="bg-white">
               <div slot="action" slot-scope="props">
 
-                  <nuxt-link :to="'/users/single-user?userId='+ props.rowData.id" class="btn btn-secondary">
+                  <nuxt-link :to="'/users/single-user?userId='+ props.rowData.id" class="btn btn-secondary btn-sm">
                       view    
                   </nuxt-link>
                   <div class="btn btn-danger" @click="openDelete(props.rowData.id)">
@@ -84,7 +84,7 @@ export default {
             loading : "loading",
             registeredUsers : "registeredUsers",
         }),
-         filterAll(){
+        filterAll(){
             try{
                 return this.registeredUsers.filter((user) => {
                 if(user){

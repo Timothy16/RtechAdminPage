@@ -174,24 +174,29 @@ export default {
                 let order_id = this.order ? this.order.id : ""
                 await this.compeleteRejectTransaction({parameter, order_id})
                 this.openAccModal = false
+                await this.getThisOrder()
             } catch (error) {
                 this.SET_SAVING(false)
             }
         },
-        async rejectOrder(){
+         async rejectOrder(){
             
             try {
                 let parameter = {
-                   id : this.order.id,
                    status : 3,
                    response : this.message
                 }
-
-                await this.acceptRejectGiftcardOrder(parameter)
+                let order_id = this.order ? this.order.id : ""
+                await this.compeleteRejectTransaction({parameter, order_id})
                 this.openRejModal = false
+                await this.getThisOrder()
             } catch (error) {
                 this.SET_SAVING(false)
             }
+        },
+        async getThisOrder(){
+            let order_id = this.$route.query.orderId
+            await this.getSingleTransactions(order_id)
         },
     },
     mounted(){

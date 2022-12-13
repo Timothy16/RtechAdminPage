@@ -9,10 +9,10 @@
             :data="giftcardRates" class="">
             
             <div slot="action" slot-scope="props">
-                <div class="btn btn-secondary" @click="editThisCard(props.rowData)">
+                <div class="btn btn-secondary btn-sm" @click="editThisCard(props.rowData)">
                     Update    
                 </div>
-                <div class="btn btn-delete" @click="openDelete(props.rowData.id)">
+                <div class="btn btn-delete btn-sm" @click="openDelete(props.rowData.id)">
                     Delete 
                 </div>
             </div>

@@ -17,7 +17,7 @@
           :data="filterAll" class="bg-white">
 
           <div slot="action" slot-scope="props">
-            <nuxt-link :to="'/reports/get-a-report?reportId='+ props.rowData.id" class="btn btn-secondary">
+            <nuxt-link :to="'/reports/get-a-report?reportId='+ props.rowData.id" class="btn btn-secondary btn-sm">
               view    
             </nuxt-link>
           </div>

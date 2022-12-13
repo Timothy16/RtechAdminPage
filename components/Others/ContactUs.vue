@@ -8,7 +8,7 @@
               :data="contacts" class="bg-white">
 
                 <div slot="action" slot-scope="props">
-                    <button @click="openDelete(props.rowData.id)"  class="btn btn-danger">
+                    <button @click="openDelete(props.rowData.id)"  class="btn btn-danger btn-sm">
                         <i class="fa fa-trash"></i>    
                     </button>
                 </div>

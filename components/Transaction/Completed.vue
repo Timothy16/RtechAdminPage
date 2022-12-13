@@ -25,7 +25,7 @@
                             left-icon-name="search"
                             :clearable='true'
                             type="text"
-                            placeholder="Enter Name"
+                            placeholder="Enter Email"
                             size="lg"
                         />
                     </div>
@@ -43,10 +43,10 @@
                 :data="filterAll" class="p-3 table-responsive-lg bg-white mt-3 table-lg">
                 
                 <div slot="action" slot-scope="props">
-                    <nuxt-link :to="'/transactions/get-giftcard-transaction?orderId='+ props.rowData.id" class="btn btn-secondary" v-if="props.rowData.product_type === 'Giftcard'">
+                    <nuxt-link :to="'/transactions/get-giftcard-transaction?orderId='+ props.rowData.id" class="btn btn-secondary btn-sm" v-if="props.rowData.product_type === 'Giftcard'">
                         View    
                     </nuxt-link>
-                    <nuxt-link :to="'/transactions/get-crypto-transaction?orderId='+ props.rowData.id" class="btn btn-secondary" v-if="props.rowData.product_type === 'Crypto'">
+                    <nuxt-link :to="'/transactions/get-crypto-transaction?orderId='+ props.rowData.id" class="btn btn-secondary btn-sm" v-if="props.rowData.product_type === 'Crypto'">
                         View    
                     </nuxt-link>
                 </div>

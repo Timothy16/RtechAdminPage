@@ -28,7 +28,7 @@
               :data="filterAll" class="bg-white">
 
                 <div slot="action" slot-scope="props">
-                    <nuxt-link :to="'/bank/single-bank?bankId='+ props.rowData.id" class="btn btn-secondary">
+                    <nuxt-link :to="'/bank/single-bank?bankId='+ props.rowData.id" class="btn btn-secondary btn-sm">
                     view    
                     </nuxt-link>
                 </div>
@@ -79,7 +79,7 @@ export default {
             loading : "loading",
             banks : "banks",
         }),
-         filterAll(){
+        filterAll(){
             try{
                 return this.banks.filter((bank) => {
                 if(bank){

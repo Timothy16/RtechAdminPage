@@ -25,7 +25,7 @@
             <div class="mt-4">
                 <div class="row">
                   <div class="col-12">
-                      <button type="submit" class="btn btn-primary btn-block btn-lg"  v-on:click="loginUser()"> {{ logining ? "Signing In..." : "Sign In" }} </button>
+                      <button type="submit" class="btn btn-primary btn-block btn-lg" :disabled="logining"  v-on:click="loginUser()"> {{ logining ? "Signing In..." : "Sign In" }} </button>
                   </div>
                 </div>
             </div>
