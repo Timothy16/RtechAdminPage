@@ -170,6 +170,7 @@ export default {
             try {
                 let parameter = {
                    status : 2,
+                   response : 'Transaction Completed'
                 }
                 let order_id = this.order ? this.order.id : ""
                 await this.compeleteRejectTransaction({parameter, order_id})

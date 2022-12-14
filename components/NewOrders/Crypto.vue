@@ -55,7 +55,9 @@
                 <div slot="sn" slot-scope="props">
                     <span>{{ props.rowIndex + 1}}</span>
                 </div>
-
+                <div slot="status" slot-scope="props">
+                    <span v-if="props.rowData.status === null" class="pending">{{ props.rowData.status === null ? 'Pending' : ''}}</span>
+                </div>
                 <div slot="name" slot-scope="props">
                     <span>{{ props.rowData.user ? props.rowData.user.name : "" }}</span>
                 </div>
@@ -96,6 +98,7 @@ export default {
                 { title: 'Email', name: 'email', width: ""}, 
                 { title: 'Crypto Category', name: 'crypto', width: ""}, 
                 { title: 'Amount', name: 'amount', width: ""}, 
+                { title: 'Status', name: 'status', width: ""}, 
                 { title: 'Date/Time', name: 'created', width: ""}, 
                 { title: 'Action', name: 'action' }, 
             ]
@@ -152,6 +155,7 @@ export default {
 </script>
 
 <style scoped>
+
 .header-info{
     font-style: normal;
     font-weight: 550;
@@ -171,6 +175,13 @@ export default {
     border-radius: 15px;
     
 } */
+.pending{
+  background: rgba(255, 165, 0, 0.2);
+  border-radius: 40px;
+  color: #FFA346;
+  padding: .5rem .7rem;
+  font-size: 14px;
+}
 a{
     text-decoration: none;
     color: #fff;

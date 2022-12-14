@@ -5,7 +5,9 @@
             <i class="fa fa-angle-left angle-edit"></i>
         </nuxt-link>
         <div class="mt-4">
-            <div class="personal-info text-center">Crypto Order #{{order.id}}  </div>
+            <div class="personal-info text-center">Crypto Order #{{order.id}}  
+                 <span v-if="order.status === null" class="pending">{{ order.status === null ? 'Pending' : ''}}</span>
+            </div>
             <hr>
             <div class="personal-info">Crypto Details </div>
             <div class="row">
@@ -263,5 +265,12 @@ export default {
     cursor: pointer;
     border: none;
     outline: none;
+}
+.pending{
+  background: rgba(255, 165, 0, 0.2);
+  border-radius: 40px;
+  color: #FFA346;
+  padding: .5rem .7rem;
+  font-size: 14px;
 }
 </style>
