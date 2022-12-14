@@ -1,93 +1,116 @@
 <template>
   <div>
-    <div class="row">
-      <div class="col-lg-4">
-        <div class="col-inner-style ">
-            <div class="class-f">
-              <img src="/images/people.png" alt="" srcset="">
-              <div>
-                <div class="text-up">Total Users</div>
-                <div class="number-up">800</div>
+    <div v-if="analytic && !loading">
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="col-inner-style ">
+              <div class="class-f">
+                <img src="/images/people.png" alt="" srcset="">
+                <div>
+                  <div class="text-up">Total Users</div>
+                  <div class="number-up">800</div>
+                </div>
               </div>
-            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="col-inner-style ">
+              <div class="class-f">
+                <img src="/images/lamp.png" alt="" srcset="">
+                <div>
+                  <div class="text-up">Total Reports</div>
+                  <div class="number-up">123</div>
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="col-inner-style ">
+              <div class="class-f">
+                <img src="/images/activity.png" alt="" srcset="">
+                <div>
+                  <div class="text-up">All Transactions</div>
+                  <div class="number-up">1500</div>
+                </div>
+              </div>
+          </div>
         </div>
       </div>
-      <div class="col-lg-4">
-        <div class="col-inner-style ">
-            <div class="class-f">
-              <img src="/images/lamp.png" alt="" srcset="">
+      <div class="row mt-5">
+        <div class="col-lg-4">
+          <div class="card-s" style="background : rgba(184, 210, 250, 0.5);">
+              <img src="/images/chart.png" class="img-fluid img-edit" alt="" srcset="">
               <div>
-                <div class="text-up">Total Reports</div>
-                <div class="number-up">123</div>
+                <div class="text-up-1">Giftcard Orders</div>
+                <div class="number-up-1">{{analytic.giftcardOrder}}</div>
               </div>
-            </div>
+          </div>
         </div>
-      </div>
-      <div class="col-lg-4">
-        <div class="col-inner-style ">
-            <div class="class-f">
-              <img src="/images/activity.png" alt="" srcset="">
+        <div class="col-lg-4">
+          <div class="card-s" style="background : rgba(182, 119, 3, 0.2);">
+              <img src="/images/chart_1.png" class="img-fluid img-edit" alt="" srcset="">
               <div>
-                <div class="text-up">All Transactions</div>
-                <div class="number-up">1500</div>
+                <div class="text-up-1">Crypto Orders</div>
+                <div class="number-up-1">{{analytic.cryptoOrder}}</div>
               </div>
-            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="card-s" style="background :  rgba(72, 223, 72, 0.2);">
+              <img src="/images/chart_success.png" class="img-fluid img-edit" alt="" srcset="">
+              <div>
+                <div class="text-up-1">Completed Transaction</div>
+                <div class="number-up-1">{{analytic.acceptedTransaction}}</div>
+              </div>
+          </div>
+        </div>
+        <div class="col-lg-4 mt-4 mb-4">
+          <div class="card-s" style="background :  #FDF1DB">
+              <img src="/images/timer.png" class="img-fluid img-edit" alt="" srcset="">
+              <div>
+                <div class="text-up-1">Pending Transaction</div>
+                <div class="number-up-1">{{analytic.pendingTransaction}}</div>
+              </div>
+          </div>
+        </div>
+        <div class="col-lg-4 mt-4 mb-4">
+          <div class="card-s" style="background : #FCCDCD">
+              <img src="/images/chart_fail.png" class="img-fluid img-edit" alt="" srcset="">
+              <div>
+                <div class="text-up-1">Rejected Transaction</div>
+                <div class="number-up-1">{{analytic.rejectedTransaction}}</div>
+              </div>
+          </div>
         </div>
       </div>
     </div>
-    <div class="row mt-5">
-      <div class="col-lg-4">
-        <div class="card-s" style="background : rgba(184, 210, 250, 0.5);">
-            <img src="/images/chart.png" class="img-fluid img-edit" alt="" srcset="">
-            <div>
-              <div class="text-up-1">Giftcard Orders</div>
-              <div class="number-up-1">800</div>
-            </div>
-        </div>
-      </div>
-      <div class="col-lg-4">
-        <div class="card-s" style="background : rgba(182, 119, 3, 0.2);">
-            <img src="/images/chart_1.png" class="img-fluid img-edit" alt="" srcset="">
-            <div>
-              <div class="text-up-1">Crypto Orders</div>
-              <div class="number-up-1">200</div>
-            </div>
-        </div>
-      </div>
-      <div class="col-lg-4">
-        <div class="card-s" style="background :  rgba(72, 223, 72, 0.2);">
-            <img src="/images/chart_success.png" class="img-fluid img-edit" alt="" srcset="">
-            <div>
-              <div class="text-up-1">Completed Transaction</div>
-              <div class="number-up-1">500</div>
-            </div>
-        </div>
-      </div>
-      <div class="col-lg-4 mt-4 mb-4">
-        <div class="card-s" style="background :  #FDF1DB">
-            <img src="/images/timer.png" class="img-fluid img-edit" alt="" srcset="">
-            <div>
-              <div class="text-up-1">Pending Transaction</div>
-              <div class="number-up-1">50</div>
-            </div>
-        </div>
-      </div>
-      <div class="col-lg-4 mt-4 mb-4">
-        <div class="card-s" style="background : #FCCDCD">
-            <img src="/images/chart_fail.png" class="img-fluid img-edit" alt="" srcset="">
-            <div>
-              <div class="text-up-1">Rejected Transaction</div>
-              <div class="number-up-1">100</div>
-            </div>
-        </div>
-      </div>
+    <div v-else>
+      <Loader />
     </div>
   </div>
 </template>
 
 <script>
+import {mapMutations, mapGetters, mapActions} from 'vuex'
 export default {
-
+    data(){
+        return {
+        }
+    },
+    computed: {
+        ...mapGetters({
+            loading : "loading",
+            analytic : 'analytic'
+        }),
+    },
+    methods : {
+        ...mapActions({
+            getAnalytics: "getAnalytics",             
+        }),
+    },
+    mounted(){
+        this.getAnalytics()
+    }
 }
 </script>
 

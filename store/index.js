@@ -12,7 +12,8 @@ export const state = () => ({
     banks : [],
     bank : null,
     contacts : [],
-    newsletters : []
+    newsletters : [],
+    analytic : null
   })
   
   export const getters = {
@@ -27,7 +28,8 @@ export const state = () => ({
     registeredUsers : state => state.registeredUsers,
     registeredUser : state => state.registeredUser,
     contacts : state => state.contacts,
-    newsletters : state => state.newsletters
+    newsletters : state => state.newsletters,
+    analytic : state => state.analytic
   }
 
 export const mutations = {
@@ -60,6 +62,9 @@ export const mutations = {
   },
   SET_BANK(state, bank)   {
     state.bank = bank
+  },
+  SET_ANALYTICS (state, analytic)   {
+    state.analytic = analytic
   },
   DELETE_USER(state, userId){
     let index = state.registeredUsers.findIndex(user => user.id === userId); 
@@ -139,6 +144,12 @@ export const actions = {
     commit('SET_LOADING', true)
     const {data} =await  this.$axios.$get(this.$config.baseURL + `admin/newsletters`, queryParam)
     commit('SET_NEWSLETTERS', data)
+    commit('SET_LOADING', false)
+  }, 
+  async getAnalytics ({commit,}, queryParam) {
+    commit('SET_LOADING', true)
+    const {data} =await  this.$axios.$get(this.$config.baseURL + `admin/analytic/orders`, queryParam)
+    commit('SET_ANALYTICS', data)
     commit('SET_LOADING', false)
   }, 
   
