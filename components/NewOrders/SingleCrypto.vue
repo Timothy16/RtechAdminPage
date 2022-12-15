@@ -175,6 +175,7 @@ export default {
 
                 await this.acceptRejectCryptoOrder(parameter)
                 this.openAccModal = false
+                this.$router.push('/transactions')
             } catch (error) {
                 this.SET_SAVING(false)
             }
@@ -190,6 +191,7 @@ export default {
 
                 await this.acceptRejectCryptoOrder(parameter)
                 this.openRejModal = false
+                this.$router.push('/transactions')
             } catch (error) {
                 this.SET_SAVING(false)
             }

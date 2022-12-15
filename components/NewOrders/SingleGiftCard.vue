@@ -34,6 +34,11 @@
                 </div>
             </div>
 
+            <div class="">
+                <div class="headers">E-code</div>
+                <div class="text-h">{{order ? order.ecode : "?"}}</div>
+            </div>
+
             <div class="headers">Transaction Image(s)</div>
             <MazGallery :images="imagesUrls" />
             <hr>
@@ -183,6 +188,7 @@ export default {
 
                 await this.acceptRejectGiftcardOrder(parameter)
                 this.openAccModal = false
+                this.$router.push('/transactions')
             } catch (error) {
                 this.SET_SAVING(false)
             }
@@ -198,6 +204,7 @@ export default {
 
                 await this.acceptRejectGiftcardOrder(parameter)
                 this.openRejModal = false
+                this.$router.push('/transactions')
             } catch (error) {
                 this.SET_SAVING(false)
             }

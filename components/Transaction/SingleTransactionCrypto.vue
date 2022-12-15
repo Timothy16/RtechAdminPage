@@ -133,7 +133,7 @@ export default {
             saving : "transactions/saving"
         }),
         total(){
-            if(this.order){
+            if(this.order.order){
                 let total = this.order.order.crypto_rate.crypto_amount * this.order.amount
                 return total ? total : ""
             }

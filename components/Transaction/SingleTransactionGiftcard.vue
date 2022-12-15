@@ -35,6 +35,10 @@
                     <div class="text-h">{{order.order ? order.order.amount : ""}}</div>
                 </div>
             </div>
+            <div class="">
+                <div class="headers">E-code</div>
+                <div class="text-h" style="word-break : break all">{{order.order ? order.order.ecode : "?"}}</div>
+            </div>
 
             <div class="headers">Transaction Image(s)</div>
             <!-- <MazGallery :images="imagesUrls" /> -->
@@ -103,7 +107,7 @@
             <div class="text-h">{{order ? order.response : "No response"}}</div>
 
             <div class="d-flex" v-if="order.status === '1'">
-                <button class="btn-active" @click.prevent="openAccept()">{{saving ? 'Please wait...' : 'Confirm Order'}}</button>
+                <button class="btn-active" @click.prevent="openAccept()">{{saving ? 'Please wait...' : 'Complete Order'}}</button>
                 <button class="btn-delete ml-3" @click.prevent="openReject()">Reject Order</button>
             </div>
         </div>
@@ -142,7 +146,7 @@ export default {
             saving : "transactions/saving"
         }),
         total(){
-            if(this.order){
+            if(this.order.order){
                 let total = this.order.order ? this.order.order.giftcard_rate.card_amount_rate * this.order.amount : ""
                 return total ? total : ""
             }
