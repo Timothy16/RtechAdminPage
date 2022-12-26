@@ -15,7 +15,7 @@
                 <div class="text-h">{{giftcard.giftcard_name}}</div>
 
                 <div class="headers">Card Image</div>
-                <div class="text-h"><img src="/images/btc_img.png" alt="" srcset=""></div> 
+                <div class="text-h"><img :src="giftcard ? giftcard.giftcard_picture : '/images/v1.png'" alt="" srcset=""></div> 
 
                 <div class="headers">Is giftcard active?</div>
                 <div class="text-h">{{parseInt(giftcard.status) ? "Yes" : "No"}}</div> 

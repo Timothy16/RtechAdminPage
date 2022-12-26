@@ -17,10 +17,20 @@
         <div class="headers">Username</div>
         <div class="text-h">{{singleReport.users.username}}</div>
 
+        <div class="headers">Profile picture</div>
+        <MazAvatar
+                :src="singleReport.users ? singleReport.users.picture :'/images/avarter.jpg'"
+                :size="120"
+                editable
+                class=""
+                bordered
+            />
+
         <div class="headers">Report</div>
         <div class="text-h">{{singleReport.complaint}}</div>
 
-        <div class="headers">Image</div>
+        
+        <div class="headers">Report Image</div>
         <MazGallery v-if="singleReport.image" :images="[singleReport.image]" height="300px"/>
         <!-- <div class="text-h" v-if="singleReport.image"><img :src="singleReport.image" alt="" srcset=""></div> -->
         <div class="text-h" v-else>No image</div>

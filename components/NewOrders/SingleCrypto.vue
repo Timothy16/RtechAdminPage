@@ -26,7 +26,7 @@
             </div>
 
             <div class="headers">Transaction Image(s)</div>
-            <!-- <MazGallery :images="imagesUrls" /> -->
+            <MazGallery :images="imagesUrls" />
             <hr>
             <div class="personal-info">Orderd By : </div>
             <div class="row">
@@ -137,16 +137,16 @@ export default {
             }
             return ""
         },
-        // imagesUrls(){
-        //     let imageUrl = []
-        //     if(this.order){
-        //         this.order.giftcard_image.forEach((image) => {
-        //             imageUrl.push(image.giftcard_image)
-        //         })
-        //         return imageUrl
-        //     }
-        //     return null
-        // },
+        imagesUrls(){
+            let imageUrl = []
+            if(this.order){
+                this.order.crypto_image.forEach((image) => {
+                    imageUrl.push(image.crypto_image)
+                })
+                return imageUrl
+            }
+            return null
+        },
     },
     methods : {
         ...mapActions({

@@ -59,9 +59,9 @@
                 if(this.newImage){
                     return this.newImage
                 }
-                // else if(this.giftcardData){
-                //     return this.giftcardData.giftcard_picture ? this.giftcardData.giftcard_picture : null
-                // }
+                else if(this.giftcardData){
+                    return this.giftcardData.giftcard_picture ? this.giftcardData.giftcard_picture : null
+                }
                 return '/images/amazon.png'
             },
         },

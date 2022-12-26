@@ -50,12 +50,12 @@
             <span class="links_name">Cryptocurrencies</span>
            </nuxt-link>
         </li>
-        <li class="mb-1">
+        <!-- <li class="mb-1">
            <nuxt-link to="/rate/giftcard" :class="{'active-h' : checkUrl == '/rate/giftcard' || checkUrl == '/rate/crypto'}">
             <i class='bx bx-coin-stack' ></i>
             <span class="links_name">Rate</span>
            </nuxt-link>
-        </li>
+        </li> -->
         <li class="mb-1">
            <nuxt-link to="/faq" :class="{'active-h' : checkUrl == '/faq' || checkUrl == '/faq'}">
             <i class='bx bx-question-mark'></i>

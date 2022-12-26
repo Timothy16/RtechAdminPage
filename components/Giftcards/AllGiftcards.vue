@@ -25,7 +25,7 @@
             <div class="col-lg-3 mb-4" v-for="(giftcard, index) in filterAll" :key="index">
                 <div class="border-edit">
                     <nuxt-link :to="'/giftcard/get-a-giftcard?giftcardId=' + giftcard.id + '&giftcardName=' +  giftcard.giftcard_name">
-                        <img src="/images/amazon.png" class="img-fluid" alt="">
+                        <img :src="giftcard ? giftcard.giftcard_picture : '/images/v1.png'" class="img-fluid w-100" alt="">
                         <div class="text-h">
                             {{giftcard.giftcard_name}}
                         </div>
@@ -67,7 +67,7 @@ export default {
             catch (error) {
                 console.log(error);
             }
-        }, 
+    }, 
    },
    methods : {
     ...mapActions({

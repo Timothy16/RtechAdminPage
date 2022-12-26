@@ -40,7 +40,7 @@
               </div>
 
               <div slot="active" slot-scope="props">
-                <span>{{parseInt(props.rowData.status) ? 'Yes' : 'No'}}</span>
+                <span>{{parseInt(props.rowData.status) ? 'No' : 'Yes'}}</span>
               </div>
 
               <div slot="joined" slot-scope="props">
@@ -73,7 +73,7 @@ export default {
                 { title: 'Username', name: 'username', width: ""}, 
                 { title: 'Phone Number', name: 'phone', width: ""}, 
                 { title: 'Email', name: 'email', width: ""},
-                { title: 'Is suspended?', name: 'active', width: ""}, 
+                { title: 'Is acc. suspended?', name: 'active', width: ""}, 
                 { title: 'Joined', name: 'joined', width: ""}, 
                 { title: 'Action', name: 'action' }, 
             ]

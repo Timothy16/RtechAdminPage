@@ -30,8 +30,8 @@
         </div>
         <div class="row">
             <div class="col-sm-12 col-lg-3 col-md-6">
-                <div class="headers">Is user active?</div>
-                <div class="text-h">{{parseInt(registeredUser.status) ? 'Yes' : "No"}}</div>
+                <div class="headers">Is user suspended?</div>
+                <div class="text-h">{{parseInt(registeredUser.status) ? 'No' : "Yes"}}</div>
             </div>
             <div class="col-sm-12 col-lg-3 col-md-6">
                 <div class="headers">Date/Time Registered</div>
