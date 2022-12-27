@@ -21,7 +21,7 @@
             </form>
         </div>
     <div class="mt-4">
-        <div class="row" v-if="giftcards.length > 1 && !loading">
+        <div class="row" v-if="giftcards.length > 0 && !loading">
             <div class="col-lg-3 mb-4" v-for="(giftcard, index) in filterAll" :key="index">
                 <div class="border-edit">
                     <nuxt-link :to="'/giftcard/get-a-giftcard?giftcardId=' + giftcard.id + '&giftcardName=' +  giftcard.giftcard_name">
