@@ -86,7 +86,7 @@ export const actions = {
     },
     async updateCryptoRate ({commit,}, {formData, crypto_id}) {
         commit('SET_SAVING', true)
-        const {data} =await  this.$axios.$patch(this.$config.baseURL + `admin/crypto/${crypto_id}/update`, formData)
+        const {data} =await  this.$axios.$post(this.$config.baseURL + `admin/crypto/${crypto_id}/update?_method=patch`, formData)
         // commit('ADD_FAQ', data)
         commit('SET_SAVING', false)
     }, 
