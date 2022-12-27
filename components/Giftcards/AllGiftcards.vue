@@ -25,7 +25,7 @@
             <div class="col-lg-3 mb-4" v-for="(giftcard, index) in filterAll" :key="index">
                 <div class="border-edit">
                     <nuxt-link :to="'/giftcard/get-a-giftcard?giftcardId=' + giftcard.id + '&giftcardName=' +  giftcard.giftcard_name">
-                        <img :src="giftcard ? giftcard.giftcard_picture : '/images/v1.png'" class="img-fluid w-100" alt="">
+                        <img :src="giftcard ? giftcard.giftcard_picture : '/images/v1.png'" class="img-fluid-1 w-100" alt="">
                         <div class="text-h">
                             {{giftcard.giftcard_name}}
                         </div>
@@ -81,6 +81,10 @@ export default {
 </script>
 
 <style scoped>
+.img-fluid-1{
+    width: 100%;
+    height: 200px;
+}
 a{
     text-decoration: none;
 }
@@ -99,7 +103,7 @@ a{
 }
 .border-edit{
     width: 258px;
-    height: 234px;
+    height: auto;
     border: 0.5px solid rgba(0, 0, 0, 0.5);
     border-radius: 10px;
     padding: .4rem;
@@ -132,7 +136,7 @@ a{
     font-size: 20px;
     line-height: 23px;
     color: #000000;
-    margin-top: 3rem;
+    margin-top: 1rem;
     text-align: center;
     word-break: break-all;
 }
