@@ -117,9 +117,14 @@
     </div>
     <MazDialog v-model="openAccModal" primary :width="500" title="Complete Trade" @confirm="acceptOrder()">
       Are you sure you want to complete this Trade?
+      <div class="form-group">
+        <label for="" class="mt-2"><strong>Message*</strong></label>
+        <textarea name="" class="form-control" id="" cols="30" v-model="message" rows="5"></textarea>
+        <p  v-if="field_errors.response" class="text-danger"> {{ field_errors.response[0]}}</p>
+      </div>
     </MazDialog>
     <MazDialog v-model="openRejModal" danger :width="500" title="Reject Trade" @confirm="rejectOrder()">
-      Are you sure you want to reject this Trade?
+       Are you sure you want to reject this Trade?
       <div class="form-group">
         <label for="" class="mt-2"><strong>Message*</strong></label>
         <textarea name="" class="form-control" id="" cols="30" v-model="message" rows="5"></textarea>
@@ -183,7 +188,7 @@ export default {
             try {
                 let parameter = {
                    status : 2,
-                   response : 'Transaction Completed'
+                   response : this.message
                 }
                 let order_id = this.order ? this.order.id : ""
                 await this.compeleteRejectTransaction({parameter, order_id})
