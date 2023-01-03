@@ -103,8 +103,11 @@
             <div class="headers">Total(user get) :</div>
             <div class="text-h">{{order.order.giftcard_rate ? order.order.giftcard_rate.currency : ""}}{{total | currency}}</div>
 
-             <div class="headers">Order response :</div>
+            <div class="headers">Order response :</div>
             <div class="text-h">{{order ? order.response : "No response"}}</div>
+
+            <div class="headers">Order response Image</div>
+            <MazGallery :images="[ order.order_image]" v-if="order.order_image"/>
 
             <div class="d-flex" v-if="order.status === '1'">
                 <button class="btn-active" @click.prevent="openAccept()">{{saving ? 'Please wait...' : 'Complete Order'}}</button>
@@ -116,20 +119,50 @@
         <Loader />
     </div>
     <MazDialog v-model="openAccModal" primary :width="500" title="Complete Trade" @confirm="acceptOrder()">
-      Are you sure you want to complete this Trade?
-      <div class="form-group">
-        <label for="" class="mt-2"><strong>Message*</strong></label>
-        <textarea name="" class="form-control" id="" cols="30" v-model="message" rows="5"></textarea>
-        <p  v-if="field_errors.response" class="text-danger"> {{ field_errors.response[0]}}</p>
-      </div>
+        Are you sure you want to complete this Trade?
+        <div class="form-group">
+            <label for="" class="mt-2"><strong>Message*</strong></label>
+            <textarea name="" class="form-control" id="" cols="30" v-model="message" rows="5"></textarea>
+            <p  v-if="field_errors.response" class="text-danger"> {{ field_errors.response[0]}}</p>
+        </div>
+        <div class="form-group mt-3">
+            <label for="" class="ml-2"><strong>Upload Transaction Image : </strong> </label>
+            <div class="trigger-layer">
+                <span><i class='fa fa-file-upload ml-5'></i> <br> Upload Image!</span>
+                <input :key="preview_list" type="file" accept="image/*"  @change="onFileChange($event)">
+            </div>
+        </div>
+
+        <div class="prevew-edit mb-3" v-if="preview_list.length">
+            <div>
+                <label for="">image preview  <span class="btn btn-danger btn-sm" @click="removeImages()">remove image</span></label>
+                <MazGallery :images="[preview_list]" height="300px"/>
+            </div>
+        </div>
     </MazDialog>
     <MazDialog v-model="openRejModal" danger :width="500" title="Reject Trade" @confirm="rejectOrder()">
-       Are you sure you want to reject this Trade?
-      <div class="form-group">
-        <label for="" class="mt-2"><strong>Message*</strong></label>
-        <textarea name="" class="form-control" id="" cols="30" v-model="message" rows="5"></textarea>
-        <p  v-if="field_errors.response" class="text-danger"> {{ field_errors.response[0]}}</p>
-      </div>
+        Are you sure you want to reject this Trade?
+        <div class="form-group">
+            <label for="" class="mt-2"><strong>Message*</strong></label>
+            <textarea name="" class="form-control" id="" cols="30" v-model="message" rows="5"></textarea>
+            <p  v-if="field_errors.response" class="text-danger"> {{ field_errors.response[0]}}</p>
+        </div>
+
+         <div class="form-group mt-3">
+            <label for="" class="ml-2"><strong>Upload Transaction Image : </strong> </label>
+            <div class="trigger-layer">
+                <span><i class='fa fa-file-upload ml-5'></i> <br> Upload Image!</span>
+                <input :key="preview_list" type="file" accept="image/*"  @change="onFileChange($event)">
+            </div>
+        </div>
+
+        <div class="prevew-edit mb-3" v-if="preview_list.length">
+            <div>
+                <label for="">image preview  <span class="btn btn-danger btn-sm" @click="removeImages()">remove image</span></label>
+                <MazGallery :images="[preview_list]" height="300px"/>
+            </div>
+        </div>
+
     </MazDialog>
   </div>
 </template>
@@ -141,7 +174,10 @@ export default {
         return {
             openAccModal : false,
             openRejModal : false,
-            message : ""
+            message : "",
+            preview_list: '',
+            image_list: [],
+            imageUpload : [],
         }
     },
     computed: {
@@ -159,13 +195,14 @@ export default {
         },
         imagesUrls(){
             let imageUrl = []
-            if(this.order.order){
+            if(this.order){
+                if(this.order.order)
                 this.order.order.giftcard_image.forEach((image) => {
                     imageUrl.push(image.giftcard_image)
                 })
                 return imageUrl
             }
-            return null
+            return []
         },
     },
     methods : {
@@ -177,6 +214,31 @@ export default {
             SET_LOADING: "transactions/SET_LOADING",
             SET_SAVING : "transactions/SET_SAVING"
         }),
+        removeImages(){
+            this.preview_list = ''
+        },
+        onFileChange(e) {
+            const file = e.target.files[0];
+            this.imageUpload = e.target.files[0];
+            this.preview_list = URL.createObjectURL(file);
+        },
+        // onFileChange(event) {
+        //     var input = event.target;
+        //     this.imageUpload = input.files
+        //     var count = input.files.length;
+        //     var index = 0;
+        //     if (input.files) {
+        //         while(count --) {
+        //         var reader = new FileReader();
+        //         reader.onload = (e) => {
+        //             this.preview_list.push(e.target.result);
+        //         }
+        //         this.image_list.push(input.files[index]);
+        //         reader.readAsDataURL(input.files[index]);
+        //         index ++;
+        //         }
+        //     }
+        // },
         openAccept(){
             this.openAccModal = true
         },
@@ -186,12 +248,27 @@ export default {
         async acceptOrder(){
             
             try {
-                let parameter = {
-                   status : 2,
-                   response : this.message
-                }
+                // let parameter = {
+                //    status : 2,
+                //    response : this.message
+                // }
+                let formData = new FormData();
+                formData.append('status', 2)
+                formData.append('response', this.message)
+                formData.append('order_image', this.imageUpload)
+                // if(this.imageUpload.length > 0){
+                //     for(var i=0 ; i < this.imageUpload.length; i++)
+                //         {
+                //             formData.append('order_image[' + i +']', this.imageUpload[i])
+                //         }
+                // }
+                
+                // else{
+                //     formData.append('order_image', this.imageUpload)
+                // }    
+
                 let order_id = this.order ? this.order.id : ""
-                await this.compeleteRejectTransaction({parameter, order_id})
+                await this.compeleteRejectTransaction({formData, order_id})
                 this.openAccModal = false
                 await this.getThisOrder()
             } catch (error) {
@@ -201,12 +278,17 @@ export default {
         async rejectOrder(){
             
             try {
-                let parameter = {
-                   status : 3,
-                   response : this.message
-                }
+                // let parameter = {
+                //    status : 3,
+                //    response : this.message
+                // }
+                let formData = new FormData();
+                formData.append('status', 3)
+                formData.append('response', this.message)
+                formData.append('order_image', this.imageUpload)
+
                 let order_id = this.order ? this.order.id : ""
-                await this.compeleteRejectTransaction({parameter, order_id})
+                await this.compeleteRejectTransaction({formData, order_id})
                 this.openRejModal = false
                 await this.getThisOrder()
             } catch (error) {
@@ -226,6 +308,40 @@ export default {
 </script>
 
 <style scoped>
+.trigger-layer {
+        position: relative;
+        /* width: 50%; */
+        font-weight: 600;
+        height: 50px;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+        margin: 5px;
+        padding-top: 8px;
+        padding-right: 16px;
+        padding-bottom: 8px;
+        padding-left: 16px;
+        background: #fff;
+        border: 1px solid rgba(12, 100, 230, 0.7);
+        border-radius: 10px;
+        color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        line-height: 1.2;
+        cursor : pointer
+}
+input[type="file"] {
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        cursor: pointer;
+}
 .bg-pad{
     padding: 2rem !important;
 }

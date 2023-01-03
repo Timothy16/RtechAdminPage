@@ -88,8 +88,8 @@
             <div class="headers">Total(user get) :</div>
             <div class="text-h">N {{total | currency}}</div>
 
-             <div class="headers">Order response :</div>
-            <div class="text-h">{{order ? order.response : "No response"}}</div>
+             <!-- <div class="headers">Order response :</div>
+            <div class="text-h">{{order ? order.response : "No response"}}</div> -->
 
             <div class="d-flex">
                 <button class="btn-active" @click.prevent="openAccept()">{{saving ? 'Accepting Order...' : 'Accept Order'}}</button>
@@ -110,6 +110,20 @@
         <textarea name="" class="form-control" id="" cols="30" v-model="message" rows="5"></textarea>
         <p  v-if="field_errors.response" class="text-danger"> {{ field_errors.response[0]}}</p>
       </div>
+      <div class="form-group mt-3">
+            <label for="" class="ml-2"><strong>Upload Transaction Image : </strong> </label>
+            <div class="trigger-layer">
+                <span><i class='fa fa-file-upload ml-5'></i> <br> Upload Image!</span>
+                <input :key="preview_list" type="file" accept="image/*"  @change="onFileChange($event)">
+            </div>
+        </div>
+
+        <div class="prevew-edit mb-3" v-if="preview_list.length">
+            <div>
+                <label for="">image preview  <span class="btn btn-danger btn-sm" @click="removeImages()">remove image</span></label>
+                <MazGallery :images="[preview_list]" height="300px"/>
+            </div>
+        </div>
     </MazDialog>
   </div>
 </template>
@@ -121,7 +135,9 @@ export default {
         return {
             openAccModal : false,
             openRejModal : false,
-            message : ""
+            message : "",
+            imageUpload : [],
+            preview_list: '',
         }
     },
     computed: {
@@ -161,19 +177,33 @@ export default {
         openAccept(){
             this.openAccModal = true
         },
+        removeImages(){
+            this.preview_list = ''
+        },
+        onFileChange(e) {
+            const file = e.target.files[0];
+            this.imageUpload = e.target.files[0];
+            this.preview_list = URL.createObjectURL(file);
+        },
         openReject(){
             this.openRejModal = true
         },
         async acceptOrder(){
             
             try {
-                let parameter = {
-                   id : this.order.id,
-                   status : 1,
-                   response : "Order Accepted"
-                }
+                // let parameter = {
+                //    id : this.order.id,
+                //    status : 1,
+                //    response : "Order is accepted"
+                // }
 
-                await this.acceptRejectCryptoOrder(parameter)
+                let formData = new FormData();
+                formData.append('id', this.order.id)
+                formData.append('status', 1)
+                formData.append('response', 'Order is accepted')
+                formData.append('order_image', this.imageUpload)
+
+                await this.acceptRejectCryptoOrder(formData)
                 this.openAccModal = false
                 this.$router.push('/transactions')
             } catch (error) {
@@ -183,13 +213,18 @@ export default {
         async rejectOrder(){
             
             try {
-                let parameter = {
-                   id : this.order.id,
-                   status : 3,
-                   response : this.message
-                }
+                // let parameter = {
+                //    id : this.order.id,
+                //    status : 3,
+                //    response : this.message
+                // }
+                let formData = new FormData();
+                formData.append('id', this.order.id)
+                formData.append('status', 3)
+                formData.append('response', this.message)
+                formData.append('order_image', this.imageUpload)
 
-                await this.acceptRejectCryptoOrder(parameter)
+                await this.acceptRejectCryptoOrder(formData)
                 this.openRejModal = false
                 this.$router.push('/transactions')
             } catch (error) {
@@ -208,6 +243,40 @@ export default {
 <style scoped>
 .bg-pad{
     padding: 2rem !important;
+}
+.trigger-layer {
+        position: relative;
+        /* width: 50%; */
+        font-weight: 600;
+        height: 50px;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+        margin: 5px;
+        padding-top: 8px;
+        padding-right: 16px;
+        padding-bottom: 8px;
+        padding-left: 16px;
+        background: #fff;
+        border: 1px solid rgba(12, 100, 230, 0.7);
+        border-radius: 10px;
+        color: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        line-height: 1.2;
+        cursor : pointer
+}
+input[type="file"] {
+        opacity: 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        cursor: pointer;
 }
 .angle-edit{
     font-size: 2rem;

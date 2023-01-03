@@ -76,9 +76,9 @@ export const actions = {
     commit('SET_SINGLE_TRANSACTIONS', data)
     commit('SET_LOADING', false)
   }, 
-  async compeleteRejectTransaction ({commit,}, {parameter, order_id}) {
+  async compeleteRejectTransaction ({commit,}, {formData, order_id}) {
     commit('SET_SAVING', true)
-    const {data} =await  this.$axios.$patch(this.$config.baseURL + `admin/transactions/status/${order_id}`, parameter)
+    const {data} =await  this.$axios.$post(this.$config.baseURL + `admin/transactions/status/${order_id}?_method=patch`, formData)
     // commit('SET_CRYPTO_ORDERS', data)
     commit('SET_SAVING', false)
   }, 
