@@ -6,7 +6,7 @@
           <div class="col-inner-style ">
               <div class="class-f">
                 <img src="/images/people.png" alt="" srcset="">
-                <div>
+                <div class="ml-3">
                   <div class="text-up">Total Users</div>
                   <div class="number-up">{{analytic.giftcardOrder ? analytic.users : 0}}</div>
                 </div>
@@ -17,7 +17,7 @@
           <div class="col-inner-style ">
               <div class="class-f">
                 <img src="/images/lamp.png" alt="" srcset="">
-                <div>
+                <div class="ml-3">
                   <div class="text-up">Total Reports</div>
                   <div class="number-up">{{analytic.giftcardOrder ? analytic.reports : 0}}</div>
                 </div>
@@ -28,7 +28,7 @@
           <div class="col-inner-style ">
               <div class="class-f">
                 <img src="/images/activity.png" alt="" srcset="">
-                <div>
+                <div class="ml-3">
                   <div class="text-up">All Transactions</div>
                   <div class="number-up">{{analytic.giftcardOrder ? analytic.transactions : 0}}</div>
                 </div>
@@ -136,15 +136,15 @@ export default {
   /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25); */
   border-radius: 20px;
   cursor: pointer;
-   transition: transform .2s;
+  transition: transform .2s;
 }
 .col-inner-style:hover{
   transform: scale(1.1);
 }
 .class-f{
   display: flex;
-  justify-content: space-between;
-  padding: 5rem;
+  /* justify-content: space-between; */
+  padding:5rem 3rem;
 }
 .text-up{
   font-style: normal;

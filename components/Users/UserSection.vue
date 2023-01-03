@@ -13,10 +13,10 @@
               :data="filterAll" class="bg-white">
               <div slot="action" slot-scope="props">
 
-                  <nuxt-link :to="'/users/single-user?userId='+ props.rowData.id" class="btn btn-secondary btn-sm">
+                  <nuxt-link :to="'/users/single-user?userId='+ props.rowData.id" class="btn btn-secondary btn-sm mb-2">
                       view    
                   </nuxt-link>
-                  <div class="btn btn-danger btn-sm" @click="openDelete(props.rowData.id)">
+                  <div class="btn btn-danger btn-sm mb-2" @click="openDelete(props.rowData.id)">
                       Delete 
                   </div>
               </div>

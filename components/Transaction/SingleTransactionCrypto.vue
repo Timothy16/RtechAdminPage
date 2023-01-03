@@ -384,4 +384,7 @@ input[type="file"] {
   border-radius: 40px;
   font-size: 14px;
 }
+a{
+    cursor: pointer;
+}
 </style>
