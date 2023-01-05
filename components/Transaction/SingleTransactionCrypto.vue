@@ -8,7 +8,7 @@
             <div class="personal-info text-center">Crypto Order #{{order.id}}  
                 <span v-if="order.status === '1'" class="pending">{{ order.status === '1' ? 'Accepted' : ''}}</span>
                 <span v-if="order.status === '2'" class="completed">{{ order.status === '2' ? 'Completed' : ''}}</span>
-                <span v-if="order.status === '3'" class="rejected">{{ order.status === '3' ? 'Rejcted' : ''}}</span>
+                <span v-if="order.status === '3'" class="rejected">{{ order.status === '3' ? 'Rejected' : ''}}</span>
             </div>
             <hr>
             <div class="personal-info">Crypto Details </div>
@@ -93,8 +93,16 @@
             <div class="headers">Order response :</div>
             <div class="text-h">{{order ? order.response : "No response"}}</div>
 
-            <div class="headers">Order response Image:</div>
-            <MazGallery :images="[order.order_image]" v-if="order.order_image"/>
+            <div v-if="order.order_image != null">
+                <div class="headers">Order response Image:</div>
+                <MazGallery :images="[order.order_image]" />
+            </div>
+            
+            <div v-if="order.order.order_image != null">
+                <div class="headers">Order response Image:</div>
+                <MazGallery :images="[order.order.order_image]" />
+            </div>
+           
 
             <div class="d-flex" v-if="order.status === '1'">
                 <button class="btn-active" @click.prevent="openAccept()">{{saving ? 'Please wait...' : 'Complete Order'}}</button>

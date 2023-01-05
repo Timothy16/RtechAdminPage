@@ -63,7 +63,7 @@
                     <span v-if="props.rowData.status === null" class="pending">{{ props.rowData.status === null ? 'Pending' : ''}}</span>
                     <span v-if="props.rowData.status === '1'" class="pending">{{ props.rowData.status === '1' ? 'Accepted' : ''}}</span>
                     <span v-if="props.rowData.status === '2'" class="completed">{{ props.rowData.status === '2' ? 'Completed' : ''}}</span>
-                    <span v-if="props.rowData.status === '3'" class="rejected">{{ props.rowData.status === '3' ? 'Rejcted' : ''}}</span>
+                    <span v-if="props.rowData.status === '3'" class="rejected">{{ props.rowData.status === '3' ? 'Rejected' : ''}}</span>
                 </div>
 
                 <div slot="email" slot-scope="props">
